@@ -1,0 +1,24 @@
+{
+  "name": "django-react-webpack",
+  "version": "1.0.0",
+  "description": "Boilerplate for a Django + React project using Webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/labcodes/django-react-webpack.git"
+  },
+  "keywords": [
+    "django",
+    "react",
+    "webpack"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/labcodes/django-react-webpack/issues"
+  },
+  "homepage": "https://github.com/labcodes/django-react-webpack#readme"
+}
