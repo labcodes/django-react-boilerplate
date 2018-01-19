@@ -4,7 +4,9 @@
   "description": "Boilerplate for a Django + React project using Webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/webpack --config webpack.config.js",
+    "watch": "npm run start -- --watch"
   },
   "repository": {
     "type": "git",
