@@ -1,12 +1,12 @@
 # Django + React + Webpack
 
-Com o advento das [*single page apps*](https://pt.wikipedia.org/wiki/Aplicativo_de_p%C3%A1gina_%C3%BAnica), é cada vez mais comum criar aplicações que rodam uma [*API*](https://pt.wikipedia.org/wiki/Interface_de_programa%C3%A7%C3%A3o_de_aplica%C3%A7%C3%B5es) no backend consumida por aplicações desenvolvidas nos mais variados frameworks Javascript. Esta arquitetura que separa o *front* do *backend* permite um desacoplamento das duas áreas, com times que podem desenvolver em seus domínios de forma totalmente independente.
+O Django é um dos *frameworks* de desenvolvimento *web* mais completos disponíveis, com quase tudo o que você precisa para colocar uma aplicação no ar. Ele gerencia tudo, desde o banco de dados até o HTML final enviado ao cliente. Porém, com o advento das [*single page apps*](https://pt.wikipedia.org/wiki/Aplicativo_de_p%C3%A1gina_%C3%BAnica), é cada vez mais comum criar aplicações que utilizam o Django somente para fornecer uma [*API*](https://pt.wikipedia.org/wiki/Interface_de_programa%C3%A7%C3%A3o_de_aplica%C3%A7%C3%B5es) que responde dados em formato JSON, consumidos por aplicações desenvolvidas nos mais variados frameworks Javascript. Esta arquitetura que separa o *front* do *back-end* permite um desacoplamento das duas áreas, com times que podem desenvolver em seus domínios de forma totalmente independente. Além de possibilitar que diversos *apps* clientes interajam com uma mesma API, garantindo ao mesmo tempo integridade de dados e regras de negócio e uma diversidade de interfaces de usuário.
 
-Dois projetos diferentes porém geram um trabalho a mais: são dois *deploys* separados, dois ambientes para configurar. Uma forma de simplificar este cenário é usar os recursos que o próprio Django já nos oferece para servir arquivos estáticos. Afinal, a aplicação *frontend* nada mais é do que um conjunto de arquivos deste tipo.
+Dois projetos diferentes porém geram um trabalho a mais: são dois *deploys* separados, dois ambientes para configurar. Uma forma de simplificar este cenário é usar os recursos que o próprio Django já nos oferece para servir arquivos estáticos. Afinal, a aplicação *front-end* nada mais é do que um conjunto de arquivos deste tipo.
 
 O objetivo deste post é mostrar passo-a-passo como criar um *setup* básico para um projeto [Django](https://www.djangoproject.com/) incluindo toda a estrutura para montar uma *app* em [React](https://reactjs.org/docs/hello-world.html) gerenciada pelo [Webpack](https://webpack.js.org/). Vou mostrar como configurar o Django para fazer este papel de servir tanto a *API* quanto a aplicação do *front*.
 
-Para quem tem mais experiência com o ambiente do Python, entender o emaranhado das bibliotecas do *frontend* pode ser um grande desafio. Há várias formas possíveis de combinar os mesmos recursos para chegar num resultado parecido e as referências que encontramos por aí não costumam ser muito claras sobre o por quê de cada coisa. É isto que vou tentar mostrar na segunda metada desse *post*.
+Para quem tem mais experiência com o ambiente do Python, entender o emaranhado das bibliotecas do *front-end* pode ser um grande desafio. Há várias formas possíveis de combinar os mesmos recursos para chegar num resultado parecido e as referências que encontramos por aí não costumam ser muito claras sobre o por quê de cada coisa. É isto que vou tentar mostrar na segunda metada desse *post*.
 
 ## Django e arquivos estáticos
 
@@ -45,9 +45,9 @@ O que vamos fazer neste passo-a-passo nada mais é do que configurar um projeto 
 
 ## Configurando o projeto
 
-O *setup* necessário é somente uma [instalação padrão do Django](https://docs.djangoproject.com/en/dev/intro/tutorial01/), opcionalmente com o [REST Framework](http://www.django-rest-framework.org/#installation) para a criação da *API* que servirá os recursos do *backend*, e o pacote [Django Webpack Loader](https://github.com/ezhome/django-webpack-loader).
-
 ### [Passo 1](https://github.com/labcodes/django-react-webpack/releases/tag/1)
+
+O *setup* necessário é somente uma [instalação padrão do Django](https://docs.djangoproject.com/en/dev/intro/tutorial01/), opcionalmente com o [REST Framework](http://www.django-rest-framework.org/#installation) para a criação da *API* que servirá os recursos do *back-end*, e o pacote [Django Webpack Loader](https://github.com/ezhome/django-webpack-loader).
 
 ```
 $ pip install django djangorestframework django-webpack-loader
@@ -55,7 +55,7 @@ $ pip freeze > requirements.txt
 $ django-admin startproject project .
 ```
 
-Vamos criar dois novos diretórios além dos criados pelo Django: `assets` para armazenar todos os nossos recursos do *frontend* e *templates* para conter a página inicial da aplicação.
+Vamos criar dois novos diretórios além dos criados pelo Django: `assets` para armazenar todos os nossos recursos do *front-end* e `templates` para conter a página inicial da aplicação.
 
 ```
 $ mkdir assets templates
@@ -81,7 +81,7 @@ Adicionamos também o diretório de `templates` à variável de `TEMPLATES` para
 ```python
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'back-end': 'django.template.back-ends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -116,7 +116,7 @@ WEBPACK_LOADER = {
 }
 ```
 
-Quanto tivermos terminado as configurações do *frontend*, o projeto terá a seguinte estrutura:
+Quanto tivermos terminado as configurações do *front-end*, o projeto terá a seguinte estrutura:
 
 ```
 +assets
@@ -137,18 +137,18 @@ Tanto `dist` quanto `webpack-stats.json` serão gerados pelo Webpack.
 
 ## Criando o template para a aplicação do *front*
 
-Nosso usuário, quanto acessar o endereço do site, vai fazer isso na raíz do domínio e é nesse ponto que vamos disponibilizar a aplicação React. Para isso, vamos adicionar uma entrada ao `urls.py` com o *template* que vai receber os arquivos disponibilizados pelo Webpack.
-
-Primeiramente, vamos criar o arquivo HTML do *template*:
+Nosso usuário, quanto acessar o endereço do site, vai fazer isso na raíz do domínio e é nesse ponto que vamos disponibilizar a aplicação React. Para isso, vamos adicionar uma entrada à lista de rotas da aplicação com o *template* que vai receber os arquivos disponibilizados pelo Webpack.
 
 ### [Passo 3](https://github.com/labcodes/django-react-webpack/releases/tag/3)
 
+Primeiramente, vamos criar o arquivo HTML do *template*:
+
 ```
-$ mkdir templates/frontend
-$ touch templates/frontend/index.html
+$ mkdir templates/front-end
+$ touch templates/front-end/index.html
 ```
 
-`templates/frontend/index.html`
+`templates/front-end/index.html`
 ```html
 {% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
@@ -176,7 +176,7 @@ O que temos neste arquivo é:
 
   - No final do `body`, usamos o `render_bundle` para carregar os *scripts* também gerados pelo Webpack
 
-  - O `body` recebe uma `div` que será a raíz da aplicação react
+  - O `body` recebe uma `div` que será a raíz da aplicação React
 
 Depois de terminado o restante da configuração ao final do passo 5 deste post, o HTML renderizado terá um conteúdo parecido com isto:
 
@@ -208,17 +208,17 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name='frontend/index.html')),
+    path('', TemplateView.as_view(template_name='front-end/index.html')),
 ]
 ```
 
-Normalmente criaríamos uma view dento de um arquivo `views.py` de uma *app*, mas como ela tem somente o propósito de renderizar um *template* sem nenhum objeto de contexto, basta adicioná-la à rota desejada.
+Normalmente criaríamos uma view dento de um arquivo `views.py` de uma *app*, mas como ela tem somente o propósito de renderizar um *template* sem nenhum objeto de contexto ou lógica associada, apensar adicioná-la à rota deixa explícito que ela não está associada a nenhuma app Django.
 
-Por enquanto, se tentarmos rodar o servidor e abrir a página no *browser*, veremos uma mensagem de erro informando que não foi encontrado o arquivo `webpack-stats.json`. Então vamos à configuração do *frontend*.
+Por enquanto, se tentarmos rodar o servidor e abrir a página no *browser*, veremos uma mensagem de erro informando que não foi encontrado o arquivo `webpack-stats.json`. Então vamos à configuração do *front-end*.
 
 ## Iniciando o projeto do *front*
 
-Para começar uma aplicação em React, um dos processos mais simples é usar o [create-react-app](https://github.com/facebook/create-react-app), que já instala e configura todas as bibliotecas necessárias para a aplicação. No entanto, a estrutura gerada por ele tem diversos elementos que não seriam necessários para o nosso caso. Além disso, uma das grandes dificuldades para quem desenvolve originalmente para o *backend* é entender o papel das diversas bibliotecas da *stack* de desenvolvimento Javascript. Por isso, decidimos explicar cada um dos elementos que vão compor o projeto.
+Para começar uma aplicação em React, um dos processos mais simples é usar o [create-react-app](https://github.com/facebook/create-react-app), que já instala e configura todas as bibliotecas necessárias para a aplicação. No entanto, a estrutura gerada por ele tem diversos elementos que não seriam necessários para o nosso caso. Além disso, ele esconde por trás de uma interface muito simples o que está sendo feito. Uma das grandes dificuldades para quem desenvolve originalmente para o *back-end* é entender o papel das diversas bibliotecas da *stack* de desenvolvimento Javascript, por isto escolhemos não utilizar este recurso.
 
 Vamos começar inicializando um projeto com o **NPM** (Node Package Manager), o gerenciador de dependências para ambientes Javascript. Ele se encarrega de baixar, instalar e gerenciar versões de pacotes JS. Se você não tem o NPM no instalado e tem dúvidas sobre como fazer isso, pode conferir a [documentação](https://nodejs.org/en/) ou, buscando no Google, seguir um tutorial com as instruções de instalação para diversas plataformas.
 
@@ -305,7 +305,9 @@ O que fizemos aqui foi:
 
   - Definir como `webpack-stats.json` o arquivo onde o Bundle Tracker armazenará o *status* final do processo, a mesma mensagem que aparece no terminal quando rodamos o Webpack.
 
-Você pode mudar os nomes dos arquivos e diretórios para o que preferir, só lembre-se de mudar também nas configurações do Webpack Loader no `settings.py`. Quando começarmos a compilar os arquivos, se houver uma mensagem de erro no `webpack-stats.json` e estivermos rodando o servidor com o parâmetro de `DEBUG = True`, a mensagem será exibida como erro 500 da mesma forma como são exibidos os erros do próprio Django.
+Você pode mudar os nomes dos arquivos e diretórios para o que preferir, só lembre-se de mudar também nas configurações do Webpack Loader no `settings.py`.
+
+Quando começarmos a compilar os arquivos, se houver uma mensagem de erro no `webpack-stats.json` e estivermos rodando o servidor com o parâmetro de `DEBUG = True`, a mensagem será exibida como erro 500 da mesma forma como são exibidos os erros do próprio Django.
 
 Voltando ao `package.json`, vamos adicionar duas entradas de *scripts* para facilitar o processo de rodar o Webpack:
 
