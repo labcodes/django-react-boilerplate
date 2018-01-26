@@ -6,7 +6,9 @@ Dois projetos diferentes porém geram um trabalho a mais: são dois *deploys* se
 
 O objetivo deste post é mostrar passo-a-passo como criar um *setup* básico para um projeto [Django](https://www.djangoproject.com/) incluindo toda a estrutura para montar uma *app* em [React](https://reactjs.org/docs/hello-world.html) gerenciada pelo [Webpack](https://webpack.js.org/). Vou mostrar como configurar o Django para fazer este papel de servir tanto a *API* quanto a aplicação do *front*.
 
-Para quem tem mais experiência com o ambiente do Python, entender o emaranhado das bibliotecas do *front-end* pode ser um grande desafio. Há várias formas possíveis de combinar os mesmos recursos para chegar num resultado parecido e as referências que encontramos por aí não costumam ser muito claras sobre o por quê de cada coisa. É isto que vou tentar mostrar na segunda metada desse *post*.
+Para quem tem mais experiência com o ambiente do Python, entender o emaranhado das bibliotecas do *front-end* pode ser um grande desafio. Há várias formas possíveis de combinar os mesmos recursos para chegar num resultado parecido e as referências que encontramos por aí não costumam ser muito claras sobre o por quê de cada coisa.
+
+Na primeira parte desse post eu pretendo mostrar como fazer o *setup* necessário no Django para disponibilizar a aplicação do *front* através da estrutura que ele já tem para servir arquivos estáticos. Além disso, vamos montar um esqueleto básico de uma aplicação em React, focando no propósito de cada elemento dele. Você não vai encontrar aqui uma explicação detalhada de como funciona o React, apenas alguns conceitos sobre o *framework* necessários para entender a configuração do ambiente. A intenção desse post é possibilitar que alguém que tenha mais experiência no *back-end* consiga integrar o *front* com mais facilidade, sem se perder na teia das bibliotecas que compôe o ambiente de desenvolvimento. A partir daí, você pode procurar por outros tutoriais ou buscar mais informações na própria documentação da ferramenta que é bastante completa e bem compreensível.
 
 ## Django e arquivos estáticos
 
@@ -363,7 +365,7 @@ $ touch .babelrc
 }
 ```
 
-Agora podemos informar no `webpack.config.js` as regras que o Webpack deve utilizar quando for compilar os arquivos `.js` ou `.jsx`. Vamos definir que todo arquivo do projeto com estas extensões devem passar pelo *loader* do Babel, exceto os que estão no diretório `node_modules`.
+Agora podemos informar no `webpack.config.js` as regras que o Webpack deve utilizar quando for compilar os arquivos `.js` ou `.jsx`. Vamos definir que todo arquivo com estas extensões devem passar pelo *loader* do Babel, exceto os que estão no diretório `node_modules`, onde ficam as dependências do projeto.
 
 `webpack.config.js`
 ```js
@@ -401,13 +403,13 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('react-app'));
 ```
 
-Usamos o ReactDOM para procurar no HTML um elemento com o id `react-app` e renderizar dentro dele o HTML gerado pelo componente `App`.
+Usamos o `ReactDOM` para procurar um elemento com o id `react-app` e renderizar dentro dele o HTML gerado pelo componente `App`.
 
 ### Organizando a aplicação
 
-Há diversas possibilidades de organizar a arquitetura de um projeto React. Nós escolhemos aqui a estrutura que separa *components* e *containers*. Os primeiros são os blocos que serão usados para montar as páginas e podem ser reaproveitados em lugares diversos, já os outros representam as páginas em si, contendo o estado global do conteúdo visualizado pelo usuário.
-
 ### [Passo 6](https://github.com/labcodes/django-react-webpack/releases/tag/6)
+
+Há diversas possibilidades de organizar a arquitetura de um projeto React. Nós escolhemos aqui a estrutura que separa *components* e *containers*. Os primeiros são os blocos que serão usados para montar as páginas e podem ser reaproveitados em lugares diversos, já os outros representam as páginas em si, contendo o estado global do conteúdo visualizado pelo usuário.
 
 ```
 $ mkdir -p assets/src/js/components/Title assets/src/js/containers/App
@@ -450,7 +452,7 @@ class App extends React.Component {
 export default App;
 ```
 
-No ponto de entrada não há mais nenhum componente sendo definido, ele apensas importa `App` do diretório de *containers*.
+No ponto de entrada não há mais nenhum componente sendo definido, ele apensas importa `App` do pacote de *containers*.
 
 `assets/src/js/index.js`
 ```js
@@ -461,8 +463,6 @@ import App from './containers/App';
 
 ReactDOM.render(<App />, document.getElementById('react-app'));
 ```
-
-A partir deste momento, não será mais preciso alterar a raíz da aplicação, ela apensas fará o papel de inserir o container principal na `div` correta da página. Todos os outros componentes e *containers* serão criados em seus respectivos diretórios e importados por quem for usá-los.
 
 ## Adicionando estilos
 
@@ -512,7 +512,7 @@ module.exports = {
 
 Definimos aqui o mesmo padrão de nomenclatura para os arquivos de `.css` que usamos para os `.js`. Assim, a *tag* que adicionamos no template do Django `{% render_bundle 'main' 'css' %}` vai procurar pelos arquivos que começam com o nome `main` e têm a extensão `.css`.
 
-Agora podemos adicionar nosso primeiro aquivo de estilo e usá-lo no Javascript.
+Agora podemos adicionar nossa primeira folha de estilos e importá-la no Javascript.
 
 ```
 $ mkdir assets/src/scss

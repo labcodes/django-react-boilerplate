@@ -8,6 +8,8 @@ The goal of this post is showing step-by-step how to create a basic setup for a 
 
 For those who are more used to the Python enviroment, the nest of Javascript libraries can be a big challenge to grasp. There are many ways of combining the same resources and get similar results. And the references we encounter on the web are frequently obscure on the purpose of each part of the setup. Thats what I'm going to try to show on this post.
 
+The first part of this post is intended to show how to do the necessary setup for Django to provide the front-end application through it's resources for serving static files. After that, we're going to build the basic structure of a React application focusing on showing the roles of each element in it. You won't find here a detailed explanation of how React works, only some core concepts to understand the configuration. The purpose of this post is to empower someone with more background on the back-end to be able to integrate with the front-end more easily without getting lost in the development environment setup. From that point, you can search for other tutorials more specific to the framework itself or even read the documentation, which is very complete and understandable.
+
 ## Django and static files
 
 On a project architecture using Django's built in [*template engine*](https://docs.djangoproject.com/en/dev/ref/templates/) the static files used on the templates, like `.css` and images, are stored in a a directory specified on the `STATICFILES_DIRS` settings viriable. You only have to define that variable and Django will serve the files for you.
@@ -341,13 +343,11 @@ $ npm install --save react react-dom
 
 Notice that when installing these packages we used the parameter `--save` instead of `--save-dev` like we did with the ones before. That's because, unlike Webpack, the React code will be compiled and delivered to the client on the final result.
 
-One thing about React that makes it different from other frameworks like Angular or JQuery is the concept of virtual DOM. Instead of manipulating elements that already exist on the DOM, it injects all the HTML that the user sees on the root element of the app. That's why the template we created for the Django view to render only had one `div`. For that reason we won't create distinct `.html` and `.js` files - the React components are in fact Javascript files containing the HTML they will render. There's a special syntax for doing that called [JSX](https://reactjs.org/docs/introducing-jsx.html) that needs to be transpiled.
+One thing about React that makes it different from other frameworks like Angular or JQuery is the concept of virtual DOM. Instead of manipulating elements that already exist in the DOM, it injects all the HTML seen by the user in the root element of the app. That's why the template we created only had one `div`. For that reason we won't create distinct `.html` and `.js` files - the React components are in fact Javascript files containing the HTML they will render. There's a special syntax for that called [JSX](https://reactjs.org/docs/introducing-jsx.html). It needs to be transpiled to become strings that can be then interpreted by the browser. That job is done by the [Babel](https://babeljs.io/) library.
 
-Uma característica do React que difere ele de outros *frameworks* como Angular ou JQuery é o *virtual DOM*: ao invés de manipular os elementos já existentes no DOM, ele se encarrega de injetar todo o HTML que aparece para o usuário no elemento raíz da aplicação. É por isto que o template que criamos no Django possui apenas uma `div`, que receberá todo o conteúdo manipulado pelo React. Assim, ao invés de criar arquivos separados de `.html` e `.js`, os componentes do React são na verdade arquivos Javascript que já contêm o HTML que vão renderizar. Para isso, usa-se uma sintaxe especial chamada [JSX](https://reactjs.org/docs/introducing-jsx.html) que depois precisar ser transpilada para virar strings que podem ser lidas pelo interpretador do browser. Quem faz este trabalho de transpilar as sintexes especiais que vamos usar é o [Babel](https://babeljs.io/).
+Besides JSX, we're going to need other transpiling rules to be able to use the [ES6](https://codetower.github.io/es6-features/) syntax, the new Javascript features not yet implemented by the browsers. It makes it possible to write modern Javascript without worrying about browser compatibility.
 
-Além do JSX, vamos adicionar as regras para utilizar a sintaxe do [ES6](https://codetower.github.io/es6-features/), os recursos mais novos do Javascript que ainda não estão implementados nos browsers. Dessa forma, podemos escrever com a sintaxe nova sem nos preocupar com compatibilidade.
-
-Vamos instalar as bibliotecas do Babel nas dependências de desenvolvimento e criar um arquivo de configuração para ele.
+Add Babel, it's loaders and presets to the development dependencies and create a configuration file for it.
 
 ```
 $ npm install --save-dev babel-cli babel-core babel-loader babel-preset-env babel-preset-es2015 babel-preset-react babel-register
@@ -363,7 +363,7 @@ $ touch .babelrc
 }
 ```
 
-Agora podemos informar no `webpack.config.js` as regras que o Webpack deve utilizar quando for compilar os arquivos `.js` ou `.jsx`. Vamos definir que todo arquivo do projeto com estas extensões devem passar pelo *loader* do Babel, exceto os que estão no diretório `node_modules`.
+Now we can tell Webpack which rules it should use to compile the `.js` or `.jsx` files. We establish that all those files in the project having those extensions should be handled by Babel Loader. Except for the ones inside `node_modules` where the projects dependencies live.
 
 `webpack.config.js`
 ```js
@@ -381,9 +381,9 @@ module.exports = {
 }
 ```
 
-Se estiver com o `npm run watch` rodando não se esqueça de interromper o processo e rodá-lo novamente toda vez que editar o `webpack.config.js`.
+If you have `npm run watch` running you'll have to stop it and run again. Do it every time you alter the `webpack.config.js` file.
 
-Com o que temos até aqui, podemos criar o primeiro componente React.
+Whit that configurantion we're able to create our first React component.
 
 `assets/src/js/index.js`
 ```js
@@ -401,20 +401,20 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('react-app'));
 ```
 
-Usamos o ReactDOM para procurar no HTML um elemento com o id `react-app` e renderizar dentro dele o HTML gerado pelo componente `App`.
+We use `ReactDOM` to find an element with the `react-app` id and render inside it the HTML generated by the `App` component.
 
-### Organizando a aplicação
-
-Há diversas possibilidades de organizar a arquitetura de um projeto React. Nós escolhemos aqui a estrutura que separa *components* e *containers*. Os primeiros são os blocos que serão usados para montar as páginas e podem ser reaproveitados em lugares diversos, já os outros representam as páginas em si, contendo o estado global do conteúdo visualizado pelo usuário.
+### Organizing the application
 
 ### [Passo 6](https://github.com/labcodes/django-react-webpack/releases/tag/6)
+
+There are many ways to structure the architecture of a React project. We are going to use here the one that separates it's elements in components and containers. The first ones are the building blocs used to assemble the pages, they can be reused in several contexts. The other ones represent the pages themselves, containing the state of the content displayed for the user.
 
 ```
 $ mkdir -p assets/src/js/components/Title assets/src/js/containers/App
 $ touch assets/src/js/components/Title/index.js assets/src/js/containers/App/index.js
 ```
 
-Vamos extrair o componente que criamos diretamente na raíz da aplicação e dividi-lo em um *container* e um componente genérico que pode ser aproveitado em outras páginas.
+Extract the component created directly in the application root and divide it in a container and a generic component to be used in other pages.
 
 `assets/src/js/components/Title/index.js`
 ```js
@@ -425,11 +425,11 @@ const Title = ({ text }) => {
     <h1>{text}</h1>
   )
 }
-
 export default Title;
+
 ```
 
-`Title` agora é apenas um elemento de título que recebe um texto para usar de conteúdo. Quem define o texto específico é o componente que vai usá-lo.
+`Title` is now just one element that receives a text to be set as it's content. The content is to be defined by the component using it.
 
 `assets/src/js/containers/App/index.js`
 ```js
@@ -450,7 +450,7 @@ class App extends React.Component {
 export default App;
 ```
 
-No ponto de entrada não há mais nenhum componente sendo definido, ele apensas importa `App` do diretório de *containers*.
+In the entry point there's no component being defined, it only imports `App` from the containers package.
 
 `assets/src/js/index.js`
 ```js
@@ -462,12 +462,9 @@ import App from './containers/App';
 ReactDOM.render(<App />, document.getElementById('react-app'));
 ```
 
-A partir deste momento, não será mais preciso alterar a raíz da aplicação, ela apensas fará o papel de inserir o container principal na `div` correta da página. Todos os outros componentes e *containers* serão criados em seus respectivos diretórios e importados por quem for usá-los.
+## Adding styles
 
-## Adicionando estilos
-
-Para desenvolver uma aplicação por completo não basta adicionar somente o conteúdo, é preciso adicionar também os estilos. Para compilar os arquivos de CSS, vamos precisar de mais alguns *loaders* e do *plugin* [Estract Text](https://github.com/webpack-contrib/extract-text-webpack-plugin). Neste projeto, escolhemos usar o SASS como processador de estilos, mas se preferir usar LESS, você pode seguir os exemplos da [documentação](https://github.com/webpack-contrib/css-loader).
-
+To have a complete application only content won't be enough, we need to add styles to it too. For compiling CSS files some other loaders and the [Estract Text](https://github.com/webpack-contrib/extract-text-webpack-plugin) plugin will be necessary. For this example we decided to use SASS as a styles pre-processor, but if you prefere using LESS, just follow the instructions in the [documentation](https://github.com/webpack-contrib/css-loader).
 
 ### [Passo 7](https://github.com/labcodes/django-react-webpack/releases/tag/7)
 
@@ -475,7 +472,7 @@ Para desenvolver uma aplicação por completo não basta adicionar somente o con
 $ npm install --save-dev css-loader style-loader sass-loader node-sass extract-text-webpack-plugin
 ```
 
-Depois de instalar as dependência, vamos adicionar novas regras para o Webpack compilar os estilos.
+After installing the dependencies, add some new rules for Webpack to compile the style sheets.
 
 `webpack.config.js`
 ```js
@@ -510,9 +507,9 @@ module.exports = {
 }
 ```
 
-Definimos aqui o mesmo padrão de nomenclatura para os arquivos de `.css` que usamos para os `.js`. Assim, a *tag* que adicionamos no template do Django `{% render_bundle 'main' 'css' %}` vai procurar pelos arquivos que começam com o nome `main` e têm a extensão `.css`.
+The naming pattern defined here for the `.css` files is the same used for the `.js` ones. The `{% render_bundle 'main' 'css' %}` tag in the Django template will search for CSS files begining with `main` and followed by a hash.
 
-Agora podemos adicionar nosso primeiro aquivo de estilo e usá-lo no Javascript.
+Now we can create our first style sheet and import it in the the components.
 
 ```
 $ mkdir assets/src/scss
@@ -545,8 +542,8 @@ import '../scss/index.scss';
 ...
 ```
 
-Lembrando que na sintaxe do JSX não se usa `class`, que é uma palavra reservada, e sim `className` para indicar as classes de CSS.
+Remember that the JSX syntax doesn't allow the `class` attribute. Use `className` insted.
 
-Pronto! Com este *setup* temos um esqueto de projeto pronto para ser desenvolvido.
+That's it! Whit this setup we have a project ready to be developed.
 
-É provável que além dessas bibliotecas, você queira adicionar outras ferramentas como o Redux, para gerenciar os estados dos componentes do React, o Bootstrap, para estilos customizados, ou compiladores, para minificar os *scripts*, por exemplo. O procedimento para isso será o mesmo que usamos para instalar o React e os *loaders* e *plugins* do Webpack: todas as bibliotecas importadas e utilizadas dentro do seu código são adicionadas às dependências normais com o `--save`, já as ferramentas de compilação e transformação do seu código vão para as dependências de desenvolvimento com o `--save-dev` e suas regras de utilização ficam nas configurações do Webpack. Na documentação de todas elas você vai encontrar exemplos de como configurá-las.
+You're probably going to add more libraries like Redux - for managing React's components states -, Bootstrap - for custom styles - or other compilers to minify or uglify your scripts. The procedure to do that is the same we did to install React, the loaders and plugins: all libraries imported and used in your code should be added to the dependencies wiht `--save`, the ones to compiling or transpiling your code go to the dev dependencies with `--save-dev` and it's rules are to be set in Webpack's configuration file. You'll find the exact instructions in their documentations.
