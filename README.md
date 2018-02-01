@@ -8,7 +8,7 @@ O objetivo deste post é mostrar passo-a-passo como criar um *setup* básico par
 
 Para quem tem mais experiência com o ambiente do Python, entender o emaranhado das bibliotecas do *front-end* pode ser um grande desafio. Há várias formas possíveis de combinar os mesmos recursos para chegar num resultado parecido e as referências que encontramos por aí não costumam ser muito claras sobre o por quê de cada coisa.
 
-Na primeira parte desse post eu pretendo mostrar como fazer o *setup* necessário no Django para disponibilizar a aplicação do *front* através da estrutura que ele já tem para servir arquivos estáticos. Além disso, vamos montar um esqueleto básico de uma aplicação em React, focando no propósito de cada elemento dele. Você não vai encontrar aqui uma explicação detalhada de como funciona o React, apenas alguns conceitos sobre o *framework* necessários para entender a configuração do ambiente. A intenção desse post é possibilitar que alguém que tenha mais experiência no *back-end* consiga integrar o *front* com mais facilidade, sem se perder na teia das bibliotecas que compôe o ambiente de desenvolvimento. A partir daí, você pode procurar por outros tutoriais ou buscar mais informações na própria documentação da ferramenta que é bastante completa e bem compreensível.
+Na primeira parte desse post eu pretendo mostrar como fazer o *setup* necessário no Django para disponibilizar a aplicação do *front* através da estrutura que ele já tem para servir arquivos estáticos. Além disso, vamos montar um esqueleto básico de uma aplicação em React, focando no propósito de cada elemento dele. Você não vai encontrar aqui uma explicação detalhada de como funciona o React, apenas alguns conceitos sobre o *framework* necessários para entender a configuração do ambiente. A intenção desse post é possibilitar que alguém que tenha mais experiência no *back-end* consiga integrar o *front* com mais facilidade, sem se perder na teia das bibliotecas que compõem o ambiente de desenvolvimento. A partir daí, você pode procurar por outros tutoriais ou buscar mais informações na própria documentação da ferramenta que é bastante completa e bem compreensível.
 
 ## Django e arquivos estáticos
 
@@ -121,25 +121,26 @@ WEBPACK_LOADER = {
 Quanto tivermos terminado as configurações do *front-end*, o projeto terá a seguinte estrutura:
 
 ```
-+assets
-  |+dist
-  |+src
-+node_modules
-+project
-+templates
-.babelrc
--manage.py
--package.json
--requirements.txt
--webpack-stats.json
-webpack.config.js
+├── node_modules
+├── project
+├── package.json
+├── templates
+├── babelrc
+├── manage.py
+├── package.json
+├── requirements.txt
+├── webpack-stats.json
+├── webpack.config.js
+└── assets
+    └── dist
+    └── src
 ```
 
 Tanto `dist` quanto `webpack-stats.json` serão gerados pelo Webpack.
 
 ## Criando o template para a aplicação do *front*
 
-Nosso usuário, quanto acessar o endereço do site, vai fazer isso na raíz do domínio e é nesse ponto que vamos disponibilizar a aplicação React. Para isso, vamos adicionar uma entrada à lista de rotas da aplicação com o *template* que vai receber os arquivos disponibilizados pelo Webpack.
+Nosso usuário, quando acessar o endereço do site, vai fazer isso na raíz do domínio e é nesse ponto que vamos disponibilizar a aplicação React. Para isso, vamos adicionar uma entrada à lista de rotas da aplicação com o *template* que vai receber os arquivos disponibilizados pelo Webpack.
 
 ### [Passo 3](https://github.com/labcodes/django-react-webpack/releases/tag/3)
 
@@ -214,7 +215,7 @@ urlpatterns = [
 ]
 ```
 
-Normalmente criaríamos uma view dento de um arquivo `views.py` de uma *app*, mas como ela tem somente o propósito de renderizar um *template* sem nenhum objeto de contexto ou lógica associada, apensar adicioná-la à rota deixa explícito que ela não está associada a nenhuma app Django.
+Normalmente criaríamos uma view dento de um arquivo `views.py` de uma *app*, mas como ela tem somente o propósito de renderizar um *template* sem nenhum objeto de contexto ou lógica associada, apenas adicioná-la à rota deixa explícito que ela não está associada a nenhuma app Django.
 
 Por enquanto, se tentarmos rodar o servidor e abrir a página no *browser*, veremos uma mensagem de erro informando que não foi encontrado o arquivo `webpack-stats.json`. Então vamos à configuração do *front-end*.
 
@@ -222,7 +223,7 @@ Por enquanto, se tentarmos rodar o servidor e abrir a página no *browser*, vere
 
 Para começar uma aplicação em React, um dos processos mais simples é usar o [create-react-app](https://github.com/facebook/create-react-app), que já instala e configura todas as bibliotecas necessárias para a aplicação. No entanto, a estrutura gerada por ele tem diversos elementos que não seriam necessários para o nosso caso. Além disso, ele esconde por trás de uma interface muito simples o que está sendo feito. Uma das grandes dificuldades para quem desenvolve originalmente para o *back-end* é entender o papel das diversas bibliotecas da *stack* de desenvolvimento Javascript, por isto escolhemos não utilizar este recurso.
 
-Vamos começar inicializando um projeto com o **NPM** (Node Package Manager), o gerenciador de dependências para ambientes Javascript. Ele se encarrega de baixar, instalar e gerenciar versões de pacotes JS. Se você não tem o NPM no instalado e tem dúvidas sobre como fazer isso, pode conferir a [documentação](https://nodejs.org/en/) ou, buscando no Google, seguir um tutorial com as instruções de instalação para diversas plataformas.
+Vamos começar inicializando um projeto com o **NPM** (Node Package Manager), o gerenciador de dependências para ambientes Javascript. Ele se encarrega de baixar, instalar e gerenciar versões de pacotes JS. Se você não tem o NPM instalado e tem dúvidas sobre como fazer isso, pode conferir a [documentação](https://nodejs.org/en/) ou, buscando no Google, seguir um tutorial com as instruções de instalação para diversas plataformas.
 
 ### [Passo 4](https://github.com/labcodes/django-react-webpack/releases/tag/4)
 
@@ -230,7 +231,7 @@ Vamos começar inicializando um projeto com o **NPM** (Node Package Manager), o 
 $ npm init
 ```
 
-Ao rodar esse comando, vão aparecer diversas perguntas sobre o projeto. Se você não quiser repondê-las por enquanto, basta dar Enter em tudo e, se preferir, pode editar estes dados depois. Ao final do processo, terá sido criado o arquivo `package.json` com as respostas que você deu
+Ao rodar esse comando, vão aparecer diversas perguntas sobre o projeto. Se você não quiser repondê-las por enquanto, basta dar Enter em tudo e, se preferir, pode editar estes dados depois. Você pode também rodar `npm init -y` que tem o mesmo efeito. Ao final do processo, terá sido criado o arquivo `package.json` com as respostas que você deu
 , nele ficarão armazenadas todas as versões de pacotes intalados pelo NPM, assim como os scripts que ele pode executar. Também deve aparecer o diretório `node_modules`, que armazena as bibliotecas baixadas por ele.
 
 Depois disto vamos criar o diretório `src` dentro do nosso diretório de `assets` e, dentro dele, o diretório `js`. Em `assets/src/js`, criaremos o arquivo `index.js`, que será o ponto de entrada da aplicação.
@@ -330,8 +331,6 @@ Se observar a árvore de diretórios do projeto, deve ter aparecido um novo cham
 
 Como o "watch" e o servidor do Django rodando já podemos abrir o endereço no browser e verificar que a aplicação está no ar.
 
-![Servidor e watch rodando](images/img1.png)
-
   **Dica**: Se ao rodar o `npm run watch` ele terminar o processo e sair dele, ao invés de continuar aberto esperando mudanças nos arquivos, dê uma olhada [aqui](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers).
   Adicione também `dist` e o `webpack-stats.json` ao seu `.gitignore` caso esteja usando o GIT.
 
@@ -345,7 +344,7 @@ $ npm install --save react react-dom
 
 Repare que a intalação destes pacotes recebeu um parâmetro diferentes das outros até agora: em vez de `--save-dev` usamos somente `--save`. Isto porque, ao contrário do Webpack, que é uma dependência de desenvolvimento, o código do React vai ser compilado e disponibilizado no Javascript final entregue ao cliente.
 
-Uma característica do React que difere ele de outros *frameworks* como Angular ou JQuery é o *virtual DOM*: ao invés de manipular os elementos já existentes no DOM, ele se encarrega de injetar todo o HTML que aparece para o usuário no elemento raíz da aplicação. É por isto que o template que criamos no Django possui apenas uma `div`, que receberá todo o conteúdo manipulado pelo React. Assim, ao invés de criar arquivos separados de `.html` e `.js`, os componentes do React são na verdade arquivos Javascript que já contêm o HTML que vão renderizar. Para isso, usa-se uma sintaxe especial chamada [JSX](https://reactjs.org/docs/introducing-jsx.html) que depois precisar ser transpilada para virar strings que podem ser lidas pelo interpretador do browser. Quem faz este trabalho de transpilar as sintexes especiais que vamos usar é o [Babel](https://babeljs.io/).
+Uma característica do React que difere ele de outros *frameworks* como Angular ou JQuery é o *virtual DOM*: ao invés de manipular os elementos já existentes no DOM, ele se encarrega de injetar todo o HTML que aparece para o usuário no elemento raíz da aplicação. É por isto que o template que criamos no Django possui apenas uma `div`, que receberá todo o conteúdo manipulado pelo React. Assim, ao invés de criar arquivos separados de `.html` e `.js`, os componentes do React são na verdade arquivos Javascript que já contêm o HTML que vão renderizar. Para isso, usa-se uma sintaxe especial chamada [JSX](https://reactjs.org/docs/introducing-jsx.html) que depois precisa ser transpilada para virar strings que podem ser lidas pelo interpretador do browser. Quem faz este trabalho de transpilar as sintexes especiais que vamos usar é o [Babel](https://babeljs.io/).
 
 Além do JSX, vamos adicionar as regras para utilizar a sintaxe do [ES6](https://codetower.github.io/es6-features/), os recursos mais novos do Javascript que ainda não estão implementados nos browsers. Dessa forma, podemos escrever com a sintaxe nova sem nos preocupar com compatibilidade.
 
