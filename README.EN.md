@@ -1,22 +1,22 @@
 # Django + React + Webpack
 
-Django is one of the most complete web frameworks available on the market. It manages everything from the database to the final HTML sent to the client. But with the introduction of the concept of [*single page apps*](wikipedia) to the front-end development environment, it has become usual to find systems using Django only to provide an [API](wikipedia) on the back-end that responds JSON data to be consumed by Javascript applications. This architecture that divides front and back-end into two separate code bases enables the independence between these sectors on the development process. It also makes it possible to have multiple client apps interacting with one API, ensuring the consistence of data and business rules and at the same time providing different user interfaces.
+Django is one of the most re web frameworks available on the market. It manages everything from the database to the final HTML sent to the client. But with the introduction of the concept of [*single page apps*](wikipedia) to the front-end development environment, it has become usual to find systems using Django only to provide an [API](wikipedia) on the back-end that responds JSON data to be consumed by Javascript applications. This architecture that divides front and back-end into two separate code bases enables the independence between these sectors on the development process. It also makes it possible to have multiple client apps interacting with one API, ensuring the consistency of data and business rules and at the same time providing different user interfaces.
 
 Having two code bases though creates some extra work. There's one more environment to configure and another deploy process to care about. A way of making this simpler is to use the resources provided by Django for serving static files. After all, a front-end application is just a set of those files.
 
 The goal of this post is showing step-by-step how to create a basic setup for a [Django project](https://www.djangoproject.com/) including all the necessary resources for a [React app](https://reactjs.org/docs/hello-world.html) managed by [Webpack](https://webpack.js.org/). I'll show how to configure Django to serve both the API and the front-end files.
 
-For those who are more used to the Python enviroment, the nest of Javascript libraries can be a big challenge to grasp. There are many ways of combining the same resources and get similar results. And the references we encounter on the web are frequently obscure on the purpose of each part of the setup. Thats what I'm going to try to show on this post.
+For those who are more used to the Python  environment, the nest of Javascript libraries can be a big challenge to grasp. There are many ways of combining the same resources and get similar results. And the references we encounter on the web are frequently obscure on the purpose of each part of the setup. That's what I'm going to try to show in this post.
 
-The first part of this post is intended to show how to do the necessary setup for Django to provide the front-end application through it's resources for serving static files. After that, we're going to build the basic structure of a React application focusing on showing the roles of each element in it. You won't find here a detailed explanation of how React works, only some core concepts to understand the configuration. The purpose of this post is to empower someone with more background on the back-end to be able to integrate with the front-end more easily without getting lost in the development environment setup. From that point, you can search for other tutorials more specific to the framework itself or even read the documentation, which is very complete and understandable.
+The first part of this post is intended to show how to do the necessary setup for Django to provide the front-end application through its resources for serving static files. After that, we're going to build the basic structure of a React application focusing on showing the roles of each element in it. You won't find here a detailed explanation of how React works, only some core concepts to understand the configuration. The purpose of this post is to empower someone with more background on the back-end to be able to integrate with the front-end more easily without getting lost in the development environment setup. From that point, you can search for other tutorials more specific to the framework itself or even read the documentation, which is very detailed and understandable.
 
 ## Django and static files
 
-On a project architecture using Django's built in [*template engine*](https://docs.djangoproject.com/en/dev/ref/templates/) the static files used on the templates, like `.css` and images, are stored in a a directory specified on the `STATICFILES_DIRS` settings viriable. You only have to define that variable and Django will serve the files for you.
+On a project architecture using Django's built-in [*template engine*](https://docs.djangoproject.com/en/dev/ref/templates/) the static files used on the templates, like `.css` and images, are stored in a directory specified on the `STATICFILES_DIRS` settings variable. You only have to define that variable and Django will serve the files for you.
 
-When we want to use those resources on a template, we can call the `load_static` template tag to generate the URL whith the path to the desired file. On the final HTML the URL will have the path defined by the `STATIC_URL` variable, that is defined as `/static/` on the initial project settings.
+When we want to use those resources on a template, we can call the `load_static` template tag to generate the URL with the path to the desired file. On the final HTML, the URL will have the path defined by the `STATIC_URL` variable, that is defined as `/static/` in the initial project settings.
 
-A template containing an image for example would be rendered the following way:
+A template containing an image, for example, would be rendered the following way:
 
   - Having the image located at `assets/my_app/examples.jpg`
 
@@ -37,13 +37,13 @@ A template containing an image for example would be rendered the following way:
     <img src="{% static "my_app/example.jpg" %}" alt="My image"/>
     ```
 
-  - And the final HTML would be renderd as
+  - And the final HTML would be rendered as
 
     ```
     <img src="/static/my_app/example.jpg" alt="My image">
     ```
 
-What we're going to show on the next part of this tutorial is how to configure a Django project to use a specific template tag that inserts on the HTML the paths to scripts and style sheet files created by Webpack. This page will hold the hole Javascript application, developed on a separate folder inside the Django project.
+What we're going to show on the next part of this tutorial is how to configure a Django project to use a specific template tag that inserts on the HTML the paths to scripts and style sheet files created by Webpack. This page will hold the whole Javascript application, developed on a separate folder inside the Django project.
 
 ## Configuring the Django project
 
@@ -57,7 +57,7 @@ $ pip freeze > requirements.txt
 $ django-admin startproject project .
 ```
 
-Besides the structure already created by Django we are going to create two more directories: `assets` will hold the static files and `templates` will receive the landing page's HTML.
+Besides the structure already created by Django, we are going to create two more directories: `assets` will hold the static files and `templates` will receive the landing page's HTML.
 
 ```
 $ mkdir assets templates
@@ -77,7 +77,7 @@ INSTALLED_APPS = [
 ]
 ```
 
-Also add the path to the `templates` directory to the `DIRS` key on the `TEMPLATES` variable and the one to `assets` to `STATICFILES_DIRS` so that Django finds the static files there.
+Also, add the path to the `templates` directory to the `DIRS` key on the `TEMPLATES` variable and the one to `assets` to `STATICFILES_DIRS` so that Django finds the static files there.
 
 `project/settings.py`
 ```python
@@ -139,7 +139,7 @@ Both `dist` and `webpack-stats.json` will be created by Webpack.
 
 ## Creating the template for the front-end application
 
-When the users accesses our website she will do it at the root of the domain. The React app will be available at this address. For that purpose we are going to add an entry to our routs list receiving the template with the resources provided by Webpack.
+When the users access our website she will do it at the root of the domain. The React app will be available at this address. For that purpose, we are going to add an entry to our routs list receiving the template with the resources provided by Webpack.
 
 ### [Step 3](https://github.com/labcodes/django-react-webpack/releases/tag/3)
 
@@ -174,7 +174,7 @@ What we have done here is:
 
     - load the `render_bundle` template tag from `webpack_loader`
 
-    - use it to load the references to the style sheets generated by Webpack insede the `head` tag
+    - use it to load the references to the style sheets generated by Webpack inside the `head` tag
 
     - load the references to the scripts files also generated by Webpack at the end of the `body` tag
 
@@ -216,11 +216,11 @@ urlpatterns = [
 
 A view would normally be placed inside the `views.py` of an app, but as this one has no logic and no context object to process, adding it directly to the rout makes it more explicit that there's no Django app associated with it.
 
-For now, if we tried to run the server and open the page on a browser we would see an error message informing that the `webpack-stats.json` file was not found. For that we are going to need the front-end configured.
+For now, if we tried to run the server and open the page in a browser we would see an error message informing that the `webpack-stats.json` file was not found. For that, we are going to need the front-end configured.
 
 ## Initializing the front-end project
 
-One of the simplest way of setting up a React project is using [create-react-app](https://github.com/facebook/create-react-app). It installs and configures all the necessary libraries the app needs, in fact, with much more than what will be necessary for us. Besides, it hides much of what's happening behind a very simple interface. It is great for quickly starting a project, but it wouldn't help our purpose of showing what each element does for the application.
+One of the simplest ways of setting up a React project is using [create-react-app](https://github.com/facebook/create-react-app). It installs and configures all the necessary libraries the app needs, in fact, with much more than what will be necessary for us. Besides, it hides much of what's happening behind a very simple interface. It is great for quickly starting a project, but it wouldn't help our purpose of showing what each element does for the application.
 
 ### [Step 4](https://github.com/labcodes/django-react-webpack/releases/tag/4)
 
@@ -230,7 +230,7 @@ We begin by initializing a project with NPM, the Node Package Manager. It downlo
 $ npm init
 ```
 
-After running this command some questions about the project will appear on the prompt. If you don't want to answer them for now, just hit enter for all of them. You can edit those information later. In the end a file named `package.json` will be created with the answers you gave. It will hold all the names and versions of the packages managed by NPM, as well as scripts it can execute. A directory called `node_modules` will also have appeared, it contains all the packages downloaded by NPM.
+After running this command some questions about the project will appear on the prompt. If you don't want to answer them for now, just hit enter for all of them. You can edit that information later. In the end, a file named `package.json` will be created with the answers you gave. It will hold all the names and versions of the packages managed by NPM, as well as scripts it can execute. A directory called `node_modules` will also have appeared, it contains all the packages downloaded by NPM.
 
 Now create the `src` directory inside `assets` and after that one the `js` folder. Inside it put a file named `index.js` to be the entry point of the application.
 
@@ -267,7 +267,7 @@ The `package.json` file now should have received the `devDependencies` key, cont
 
 ### [Step 5](https://github.com/labcodes/django-react-webpack/releases/tag/5)
 
-Having Webpack installed we can create it's configuration file. That's where it will gather the information it needs about where and how to compile the files it will manage.
+Having Webpack installed we can create its configuration file. That's where it will gather the information it needs about where and how to compile the files it will manage.
 
 ```
 $ touch webpack.config.js
@@ -306,7 +306,7 @@ What we defined here is:
 
     - `webpack-stats.json` as the file where the Bundle Tracker will write the status of the process, the same one we see at the terminal when running Webpack
 
-You can change the names of those files and directories the way you feel prefere, just remember to change it on the Webpack Loader section in `settings.py`.
+You can change the names of those files and directories the way you feel prefer, just remember to change it on the Webpack Loader section in `settings.py`.
 
 As we start compiling the files, if there's an error message in `webpack-stats.json` and the Django server is running with the `DEBUG` parameter set to `True` this message will be displayed as a 500 error the same way Django's own messages are shown.
 
@@ -325,17 +325,17 @@ Back to the `package.json` file, we can add two entries to the `scripts` attribu
 
 Now for calling Webpack to compile the files you can run `npm run start` on a terminal. For doing it on watch mode type `npm run watch`: it will update the results every time a file is changed.
 
-If you look at the directories tree a new one called `dist` should have appeared under `assets` with a file named something like `main-315df4b2f5abf7716c38.js`. There should also be a new file called `webpack-stats.json` on the projec root.
+If you look at the directories tree a new one called `dist` should have appeared under `assets` with a file named something like `main-315df4b2f5abf7716c38.js`. There should also be a new file called `webpack-stats.json` on the project root.
 
-With the Dajngo server and Webpack running you can open the browser to see that the application is up.
+With the Django server and Webpack running you can open the browser to see that the application is up.
 
 ![Django server and watch running](images/img1.png)
 
-    **Tip**: If the process finishes and exist by itself when running `npm run watch` it could be becouse of [this](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers). You should also add `dist` and `webpack-stats.json` to your `.gitignore` file if you're using GIT.
+    **Tip**: If the process finishes and exist by itself when running `npm run watch` it could be because of [this](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers). You should also add `dist` and `webpack-stats.json` to your `.gitignore` file if you're using GIT.
 
 ## Configuring React
 
-Until now, the setup we have could be used for any Javascript framework you want to use for an application. From this point we are going to add the settings needed by React.
+Until now, the setup we have could be used for any Javascript framework you want to use for an application. From this point, we are going to add the settings needed by React.
 
 ```
 $ npm install --save react react-dom
@@ -343,7 +343,7 @@ $ npm install --save react react-dom
 
 Notice that when installing these packages we used the parameter `--save` instead of `--save-dev` like we did with the ones before. That's because, unlike Webpack, the React code will be compiled and delivered to the client on the final result.
 
-One thing about React that makes it different from other frameworks like Angular or JQuery is the concept of virtual DOM. Instead of manipulating elements that already exist in the DOM, it injects all the HTML seen by the user in the root element of the app. That's why the template we created only had one `div`. For that reason we won't create distinct `.html` and `.js` files - the React components are in fact Javascript files containing the HTML they will render. There's a special syntax for that called [JSX](https://reactjs.org/docs/introducing-jsx.html). It needs to be transpiled to become strings that can be then interpreted by the browser. That job is done by the [Babel](https://babeljs.io/) library.
+One thing about React that makes it different from other frameworks like Angular or JQuery is the concept of virtual DOM. Instead of manipulating elements that already exist in the DOM, it injects all the HTML seen by the user in the root element of the app. That's why the template we created only had one `div`. For that reason, we won't create distinct `.html` and `.js` files - the React components are in fact Javascript files containing the HTML they will render. There's a special syntax for that called [JSX](https://reactjs.org/docs/introducing-jsx.html). It needs to be transpiled to become strings that can be then interpreted by the browser. That job is done by the [Babel](https://babeljs.io/) library.
 
 Besides JSX, we're going to need other transpiling rules to be able to use the [ES6](https://codetower.github.io/es6-features/) syntax, the new Javascript features not yet implemented by the browsers. It makes it possible to write modern Javascript without worrying about browser compatibility.
 
@@ -363,7 +363,7 @@ $ touch .babelrc
 }
 ```
 
-Now we can tell Webpack which rules it should use to compile the `.js` or `.jsx` files. We establish that all those files in the project having those extensions should be handled by Babel Loader. Except for the ones inside `node_modules` where the projects dependencies live.
+Now we can tell Webpack which rules it should use to compile the `.js` or `.jsx` files. We establish that all those files in the project having those extensions should be handled by Babel Loader. Except for the ones inside `node_modules` where the project's dependencies live.
 
 `webpack.config.js`
 ```js
@@ -383,7 +383,7 @@ module.exports = {
 
 If you have `npm run watch` running you'll have to stop it and run again. Do it every time you alter the `webpack.config.js` file.
 
-Whit that configurantion we're able to create our first React component.
+Whit that configuration we're able to create our first React component.
 
 `assets/src/js/index.js`
 ```js
@@ -407,7 +407,7 @@ We use `ReactDOM` to find an element with the `react-app` id and render inside i
 
 ### [Passo 6](https://github.com/labcodes/django-react-webpack/releases/tag/6)
 
-There are many ways to structure the architecture of a React project. We are going to use here the one that separates it's elements in components and containers. The first ones are the building blocs used to assemble the pages, they can be reused in several contexts. The other ones represent the pages themselves, containing the state of the content displayed for the user.
+There are many ways to structure the architecture of a React project. We are going to use here the one that separates its elements in components and containers. The first ones are the building blocks used to assemble the pages, they can be reused in several contexts. The other ones represent the pages themselves, containing the state of the content displayed for the user.
 
 ```
 $ mkdir -p assets/src/js/components/Title assets/src/js/containers/App
@@ -450,7 +450,7 @@ class App extends React.Component {
 export default App;
 ```
 
-In the entry point there's no component being defined, it only imports `App` from the containers package.
+In the entry point, there's no component being defined, it only imports `App` from the containers package.
 
 `assets/src/js/index.js`
 ```js
@@ -464,7 +464,7 @@ ReactDOM.render(<App />, document.getElementById('react-app'));
 
 ## Adding styles
 
-To have a complete application only content won't be enough, we need to add styles to it too. For compiling CSS files some other loaders and the [Estract Text](https://github.com/webpack-contrib/extract-text-webpack-plugin) plugin will be necessary. For this example we decided to use SASS as a styles pre-processor, but if you prefere using LESS, just follow the instructions in the [documentation](https://github.com/webpack-contrib/css-loader).
+To have a complete application only content won't be enough, we need to add styles to it too. For compiling CSS files some other loaders and the [Estract Text](https://github.com/webpack-contrib/extract-text-webpack-plugin) plugin will be necessary. For this example, we decided to use SASS as a styles pre-processor, but if you prefer using LESS, just follow the instructions in the [documentation](https://github.com/webpack-contrib/css-loader).
 
 ### [Passo 7](https://github.com/labcodes/django-react-webpack/releases/tag/7)
 
@@ -507,9 +507,9 @@ module.exports = {
 }
 ```
 
-The naming pattern defined here for the `.css` files is the same used for the `.js` ones. The `{% render_bundle 'main' 'css' %}` tag in the Django template will search for CSS files begining with `main` and followed by a hash.
+The naming pattern defined here for the `.css` files is the same used for the `.js` ones. The `{% render_bundle 'main' 'css' %}` tag in the Django template will search for CSS files beginning with `main` and followed by a hash.
 
-Now we can create our first style sheet and import it in the the components.
+Now we can create our first style sheet and import it into the components.
 
 ```
 $ mkdir assets/src/scss
@@ -542,8 +542,8 @@ import '../scss/index.scss';
 ...
 ```
 
-Remember that the JSX syntax doesn't allow the `class` attribute. Use `className` insted.
+Remember that the JSX syntax doesn't allow the `class` attribute. Use `className` instead.
 
 That's it! Whit this setup we have a project ready to be developed.
 
-You're probably going to add more libraries like Redux - for managing React's components states -, Bootstrap - for custom styles - or other compilers to minify or uglify your scripts. The procedure to do that is the same we did to install React, the loaders and plugins: all libraries imported and used in your code should be added to the dependencies wiht `--save`, the ones to compiling or transpiling your code go to the dev dependencies with `--save-dev` and it's rules are to be set in Webpack's configuration file. You'll find the exact instructions in their documentations.
+You're probably going to add more libraries like Redux - for managing React's components states -, Bootstrap - for custom styles - or other compilers to minify or uglify your scripts. The procedure to do that is the same we did to install React, the loaders and plugins: all libraries imported and used in your code should be added to the dependencies with `--save`, the ones to compiling or transpiling your code go to the dev dependencies with `--save-dev` and its rules are to be set in Webpack's configuration file. You'll find the exact instructions in their documentation.
