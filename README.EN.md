@@ -1,6 +1,6 @@
 # Django + React + Webpack
 
-Django is one of the most re web frameworks available on the market. It manages everything from the database to the final HTML sent to the client. But with the introduction of the concept of [*single page apps*](wikipedia) to the front-end development environment, it has become usual to find systems using Django only to provide an [API](wikipedia) on the back-end that responds JSON data to be consumed by Javascript applications. This architecture that divides front and back-end into two separate code bases enables the independence between these sectors on the development process. It also makes it possible to have multiple client apps interacting with one API, ensuring the consistency of data and business rules and at the same time providing different user interfaces.
+Django is one of the most resourceful web frameworks available on the market. It manages everything from the database to the final HTML sent to the client. But with the introduction of the concept of [*single page apps*](https://en.wikipedia.org/wiki/Single-page_application) to the front-end development environment, it has become usual to find systems using Django only to provide an [API](https://en.wikipedia.org/wiki/Web_API) on the back-end that responds JSON data to be consumed by Javascript applications. This architecture that divides front and back-end into two separate code bases enables the independence between these sectors on the development process. It also makes it possible to have multiple client apps interacting with one API, ensuring the consistency of data and business rules and at the same time providing different user interfaces.
 
 Having two code bases though creates some extra work. There's one more environment to configure and another deploy process to care about. A way of making this simpler is to use the resources provided by Django for serving static files. After all, a front-end application is just a set of those files.
 
@@ -12,9 +12,9 @@ The first part of this post is intended to show how to do the necessary setup fo
 
 ## Django and static files
 
-On a project architecture using Django's built-in [*template engine*](https://docs.djangoproject.com/en/dev/ref/templates/) the static files used on the templates, like `.css` and images, are stored in a directory specified on the `STATICFILES_DIRS` settings variable. You only have to define that variable and Django will serve the files for you.
+On a project architecture using Django's built-in [*template engine*](https://docs.djangoproject.com/en/dev/ref/templates/) the static files used on the templates, like `.css` and images can be stored inside each app's `static` directory or in the directory specified on the `STATICFILES_DIRS` settings variable. You only have to define that variable and Django will serve the files for you.
 
-When we want to use those resources on a template, we can call the `load_static` template tag to generate the URL with the path to the desired file. On the final HTML, the URL will have the path defined by the `STATIC_URL` variable, that is defined as `/static/` in the initial project settings.
+When we want to use those resources on a template, we can call the `load_static` template tag to generate the URL with the path to the desired file. On the final HTML, the URL will have the path defined by the `STATIC_URL` variable - defined as `/static/` in the initial project settings.
 
 A template containing an image, for example, would be rendered the following way:
 
@@ -49,7 +49,7 @@ What we're going to show on the next part of this tutorial is how to configure a
 
 ### [Step 1](https://github.com/labcodes/django-react-webpack/releases/tag/1)
 
-The initial setup we need is just a standard ]Django installation](https://docs.djangoproject.com/en/dev/intro/tutorial01/), optionally with [REST Framework](http://www.django-rest-framework.org/#installation) for the building the API, and the [Django Webpack Loader](https://github.com/ezhome/django-webpack-loader) package.
+The initial setup we need is just a standard [Django installation](https://docs.djangoproject.com/en/dev/intro/tutorial01/), optionally with [REST Framework](http://www.django-rest-framework.org/#installation) for the building the API, and the [Django Webpack Loader](https://github.com/ezhome/django-webpack-loader) package.
 
 ```
 $ pip install django djangorestframework django-webpack-loader
