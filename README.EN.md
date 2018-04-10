@@ -265,7 +265,7 @@ The `package.json` file should have received by now the `devDependencies` key, c
 ...
 ```
 
-    **Tip**: If you are using GIT for version control add the `node_modules` directory and the `package-lock.json` file to `.gitignore`. Also, if you didn't change the database settings for the Django project and intend to use the SQLite backend, add the `db.sqlite3` file to it too;
+**Tip**: If you are using GIT for version control add the `node_modules` directory and the `package-lock.json` file to `.gitignore`. Also, if you didn't change the database settings for the Django project and intend to use the SQLite backend, add the `db.sqlite3` file to it too;
 
 ### [Step 5](https://github.com/labcodes/django-react-webpack/releases/tag/5)
 
