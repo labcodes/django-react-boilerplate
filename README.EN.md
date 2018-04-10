@@ -331,9 +331,8 @@ If you look at the directories tree a new one called `dist` should have appeared
 
 With the Django server and Webpack running you can open the browser to see that the application is up.
 
-![Django server and watch running](images/img1.png)
 
-    **Tip**: If the process finishes and exist by itself when running `npm run watch` it could be because of [this](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers). You should also add `dist` and `webpack-stats.json` to your `.gitignore` file if you're using GIT.
+**Tip**: If the process finishes and exist by itself when running `npm run watch` it could be because of [this](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers). You should also add `dist` and `webpack-stats.json` to your `.gitignore` file if you're using GIT.
 
 ## Configuring React
 
