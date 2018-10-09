@@ -216,9 +216,9 @@ urlpatterns = [
 ]
 ```
 
-A view would normally be placed inside the `views.py` of an app, but since this one has no logic and no context object to process, adding it directly to the rout makes it more explicit that there's no Django app associated with it.
+A view would normally be placed inside the `views.py` of an app, but since this one has no logic and no context object to process, adding it directly to the route makes it more explicit that there's no Django app associated with it.
 
-At the moment, if we tried to run the server and open the page in a browser we would see an error message informing that the `webpack-stats.json` file was not found. For that, we need the front-end to beconfigured.
+At the moment, if we tried to run the server and open the page in a browser we would see an error message informing that the `webpack-stats.json` file was not found. For that, we need the front-end to be configured.
 
 ## Initializing the front-end project
 
@@ -332,7 +332,7 @@ If you look at the directories tree a new one called `dist` should have appeared
 With the Django server and Webpack running you can open the browser to see that the application is up.
 
 
-**Tip**: If the process finishes and exist by itself when running `npm run watch` it could be because of [this](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers). You should also add `dist` and `webpack-stats.json` to your `.gitignore` file if you're using GIT.
+**Tip**: If the process finishes and exits by itself when running `npm run watch` it could be because of [this](https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers). You should also add `dist` and `webpack-stats.json` to your `.gitignore` file if you're using GIT.
 
 ## Configuring React
 
@@ -406,7 +406,7 @@ We use `ReactDOM` to find an element with the `react-app` id and render inside i
 
 ### Organizing the application
 
-### [Passo 6](https://github.com/labcodes/django-react-webpack/releases/tag/6)
+### [Step 6](https://github.com/labcodes/django-react-webpack/releases/tag/6)
 
 There are many ways to structure the architecture of a React project. We are going to use here the one that separates its elements in components and containers. The first ones are the building blocks used to assemble the pages, they can be reused in several contexts. The other ones represent the pages themselves, containing the state of the content displayed for the user.
 
@@ -467,7 +467,7 @@ ReactDOM.render(<App />, document.getElementById('react-app'));
 
 To have a complete application only content won't be enough, we need to add styles to it too. For compiling CSS files some other loaders and the [Estract Text](https://github.com/webpack-contrib/extract-text-webpack-plugin) plugin will be necessary. For this example, we decided to use SASS as a styles pre-processor, but if you prefer using LESS, just follow the instructions in the [documentation](https://github.com/webpack-contrib/css-loader).
 
-### [Passo 7](https://github.com/labcodes/django-react-webpack/releases/tag/7)
+### [Step 7](https://github.com/labcodes/django-react-webpack/releases/tag/7)
 
 ```
 $ npm install --save-dev css-loader style-loader sass-loader node-sass extract-text-webpack-plugin
