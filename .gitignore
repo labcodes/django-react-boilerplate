@@ -9,12 +9,14 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
+bin/
 build/
 develop-eggs/
 dist/
 downloads/
 eggs/
 .eggs/
+include/
 lib/
 lib64/
 parts/
@@ -106,6 +108,7 @@ db.sqlite3
 # Node
 node_modules
 package-lock.json
+yarn.lock
 
 # Webpack
 webpack-stats.json
