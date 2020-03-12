@@ -2,6 +2,7 @@ import React from "react";
 import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { fetchWelcomeMessage } from "./actions";
 
@@ -35,6 +36,10 @@ export class Welcome extends React.Component {
           file to start developing your app :]
         </p>
         {message ? <p>{message}</p> : null}
+        <p>
+          To understand a bit better about routing, take a look at our{" "}
+          <Link to="/sample-nested-page/">sample nested page</Link>.
+        </p>
       </div>
     );
   }

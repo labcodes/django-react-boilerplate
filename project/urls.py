@@ -29,8 +29,13 @@ def sample_api_view(request):
     })
 
 
+frontend_urls = [
+    path('sample-nested-page/', TemplateView.as_view(template_name='frontend/index.html')),
+    path('', TemplateView.as_view(template_name='frontend/index.html')),
+]
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/sample-api-view/', sample_api_view),
-    path('', TemplateView.as_view(template_name='frontend/index.html')),
-]
+] + frontend_urls
