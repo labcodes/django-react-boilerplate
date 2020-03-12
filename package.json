@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rm -rf ./static/react-app/dist/ && webpack-cli --config webpack.config.production.js --mode=production",
+    "lint": "eslint ./react-app/",
     "start": "node server.js"
   },
   "repository": {
@@ -17,6 +18,11 @@
     "react",
     "webpack"
   ],
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run lint"
+    }
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -43,6 +49,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "husky": "^4.2.3",
     "mini-css-extract-plugin": "^0.9.0",
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
