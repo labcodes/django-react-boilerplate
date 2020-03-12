@@ -1,4 +1,5 @@
 import React from "react";
+import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
@@ -24,6 +25,10 @@ export class Welcome extends React.Component {
 
     return (
       <div id="welcome">
+        <Helmet>
+          <title>DRW - Welcome!</title>
+        </Helmet>
+
         <h1>Welcome to our app!</h1>
         <p>
           Now, you may edit the routes on the `routes.js` file and/or edit this
