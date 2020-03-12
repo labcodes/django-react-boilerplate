@@ -16,8 +16,21 @@ Including another URLconf
 from django.contrib import admin
 from django.views.generic import TemplateView
 from django.urls import path
+from time import sleep
+
+
+def sample_api_view(request):
+    from django.http import JsonResponse
+    sleep(2)
+    return JsonResponse({
+        'message': '''This message is coming from the backend.
+                      The django view is inside `project/urls.py` and the redux code is in `react-app/src/js/welcome/(actions|reducers).js`.
+                      Please remove them when starting your project :]'''
+    })
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/sample-api-view/', sample_api_view),
     path('', TemplateView.as_view(template_name='frontend/index.html')),
 ]
