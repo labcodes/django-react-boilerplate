@@ -106,6 +106,9 @@ ENV/
 # SQLite
 db.sqlite3
 
+# Django collected static files
+staticfiles/
+
 # Node
 node_modules
 package-lock.json
