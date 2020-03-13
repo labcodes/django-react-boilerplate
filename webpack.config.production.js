@@ -7,9 +7,9 @@ var MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
   entry: ["./react-app/src/js/index"],
   output: {
-    path: path.resolve("./static/react-app/dist/"),
+    path: path.resolve("./react-app/dist/"),
     filename: "[name]-[hash].js",
-    publicPath: "/static/react-app/dist/" // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
+    publicPath: "/static/" // Tell django to use this URL to load packages and not use STATIC_URL + bundle_name
   },
   module: {
     rules: [
