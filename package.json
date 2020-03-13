@@ -4,7 +4,7 @@
   "description": "Boilerplate for a Django + React project using Webpack",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "rm -rf ./static/react-app/dist/ && webpack-cli --config webpack.config.production.js --mode=production",
     "lint": "eslint ./react-app/",
     "start": "node server.js"
@@ -23,6 +23,11 @@
       "pre-push": "npm run lint"
     }
   },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "./react-app/src/js/setupTests.js"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -37,11 +42,15 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.8.7",
     "@babel/preset-react": "^7.8.3",
+    "@types/jest": "^25.1.4",
     "autoprefixer": "^9.7.4",
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
     "compression-webpack-plugin": "^3.1.0",
     "css-loader": "^3.4.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",
@@ -54,6 +63,7 @@
     "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^1.19.1",
+    "react-test-renderer": "^16.13.0",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",
     "styled-components": "^5.0.1",
@@ -63,6 +73,7 @@
     "webpack-dev-server": "^3.10.3"
   },
   "dependencies": {
+    "jest": "^25.1.0",
     "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
