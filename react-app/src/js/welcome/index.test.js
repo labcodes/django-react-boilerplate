@@ -2,7 +2,7 @@ import React from "react";
 import { shallow, mount } from "enzyme";
 
 import { BrowserRouter } from "react-router-dom";
-import { Welcome } from "../index";
+import { Welcome } from "./index";
 
 describe("Welcome", () => {
   it("renders without props", async () => {
