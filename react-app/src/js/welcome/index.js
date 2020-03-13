@@ -35,7 +35,7 @@ export class Welcome extends React.Component {
           Now, you may edit the routes on the `routes.js` file and/or edit this
           file to start developing your app :]
         </p>
-        {message ? <p>{message}</p> : null}
+        {message ? <p className="message">{message}</p> : null}
         <p>
           To understand a bit better about routing, take a look at our{" "}
           <Link to="/sample-nested-page/">sample nested page</Link>.
