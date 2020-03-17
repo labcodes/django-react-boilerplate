@@ -3,13 +3,17 @@ asgiref==3.2.5
 attrs==19.3.0
 black==19.10b0
 click==7.1.1
+dj-database-url==0.5.0
 Django==3.0.4
+django-heroku==0.3.1
 django-webpack-loader==0.7.0
 djangorestframework==3.11.0
 entrypoints==0.3
 flake8==3.7.9
+gunicorn==20.0.4
 mccabe==0.6.1
 pathspec==0.7.0
+psycopg2==2.8.4
 pycodestyle==2.5.0
 pyflakes==2.1.1
 python-decouple==3.3
@@ -18,3 +22,4 @@ regex==2020.2.20
 sqlparse==0.3.1
 toml==0.10.0
 typed-ast==1.4.1
+whitenoise==5.0.1
