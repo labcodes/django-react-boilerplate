@@ -1,16 +1,23 @@
+{% load pwa %}
 {% load render_bundle from webpack_loader %}
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>Django React Webpack</title>
-    <!-- Webpack rendered CSS -->
-    {% render_bundle 'main' 'css' %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Django React Webpack</title>
+  <!-- Webpack rendered CSS -->
+  {% render_bundle 'main' 'css' %}
+  {% progressive_web_app_meta %}
 </head>
 
 <body>
-    <div id="react-app"></div>
-    <!-- Webpack rendered JS -->
-    {% render_bundle 'main' 'js' %}
+  <noscript>This page requires javascript to run. Please, enable javascript.</noscript>
+  <div id="react-app"></div>
+  <!-- Webpack rendered JS -->
+  {% render_bundle 'main' 'js' %}
+
 </body>
+
 </html>

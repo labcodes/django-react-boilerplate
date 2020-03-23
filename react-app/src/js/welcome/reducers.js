@@ -14,13 +14,18 @@ export default function welcomeReducers(state = initialState, action) {
         message: "Welcome Message is being fetched from the API..."
       };
 
-    case FETCH_WELCOME_MESSAGE_SUCCESS:
     case FETCH_WELCOME_MESSAGE_FAILURE:
+      return {
+        ...state,
+        message:
+          "It seems we're having trouble accessing the API. Are you testing the PWA?"
+      };
+
+    case FETCH_WELCOME_MESSAGE_SUCCESS:
       const { message } = action.response.data;
       return {
         ...state,
-        message,
-        action
+        message
       };
 
     default:

@@ -3,6 +3,11 @@ var path = require("path");
 var BundleTracker = require("webpack-bundle-tracker");
 var CompressionPlugin = require('compression-webpack-plugin');
 var MiniCssExtractPlugin = require('mini-css-extract-plugin');
+var workbox = require('workbox-webpack-plugin');
+var uuid4 = require('uuid4');
+
+var cacheHash = uuid4();
+
 
 module.exports = {
   entry: ["./react-app/src/js/index"],
@@ -36,6 +41,18 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: "[name]-[hash].css"
+    }),
+    new workbox.GenerateSW({
+      // these options encourage the ServiceWorkers to get in there fast
+      // and not allow any straggling "old" SWs to hang around
+      clientsClaim: true,
+      skipWaiting: true,
+      inlineWorkboxRuntime: true,
+      additionalManifestEntries: [
+        { url: "/", revision: cacheHash },
+        { url: "/manifest.json", revision: cacheHash },
+        { url: "/static/images/my_app_icon.png", revision: cacheHash },
+      ]
     }),
     new CompressionPlugin()
   ],
