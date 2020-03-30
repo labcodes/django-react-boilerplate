@@ -127,6 +127,8 @@ STATICFILES_DIRS = (
 # PWA configuration
 
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, "react-app/dist/service-worker.js")
+
+
 PWA_APP_NAME = "DRW - Change me!"
 PWA_APP_DESCRIPTION = "DRW - Change me!"
 PWA_APP_THEME_COLOR = "#0A0302"
