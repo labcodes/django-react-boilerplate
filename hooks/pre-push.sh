@@ -61,7 +61,14 @@ run_black () {
 create_commit () {
   read -p "Create commit with all changes? ANY UNSTAGED FILES WILL ALSO BE COMMITED (y/N) " commit_confirm < /dev/tty
   case $commit_confirm in
-    [Yy]* ) git add .; git commit -m 'Black'; git push --no-verify; exit 1;;
+    [Yy]* )
+      git add .
+      git commit -m 'Black'
+      git push --no-verify
+      echo ""
+      echo "Because of implementation details on git hooks, it will seem like the push failed. It didn't. Ignore any messages related to it and check manually, if it's the case."
+      echo ""
+      exit 1;;
     [Nn]* )
       echo ""
       echo "Please, commit your changes manually then try again."
