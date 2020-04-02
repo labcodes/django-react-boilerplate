@@ -18,7 +18,8 @@ export class Welcome extends React.Component {
   };
 
   componentDidMount() {
-    this.props.fetchWelcomeMessage();
+    const { fetchWelcomeMessage } = this.props;
+    fetchWelcomeMessage();
   }
 
   render() {
@@ -37,8 +38,8 @@ export class Welcome extends React.Component {
         </p>
         {message ? <p className="message">{message}</p> : null}
         <p>
-          To understand a bit better about routing, take a look at our{" "}
-          <Link to="/sample-nested-page/">sample nested page</Link>.
+          To understand a bit better about routing, take a look at our
+          <Link to="/sample-nested-page/"> sample nested page</Link>.
         </p>
       </div>
     );
