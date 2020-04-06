@@ -8,44 +8,25 @@ It's still on beta, so expect little bugs to happen. They shouldn't, but if they
 
 ## Setup
 
-The easiest way to get started with this boilerplate is to run the following script. It downloads the current code, unpacks it, then sets up nvm and dependencies. We require wget, make, python>=3.6 and nodejs>=lts. On Ubuntu 18.04, you need libpq-dev and python3-dev too.
+First of all, we require wget, make, python>=3.6 and nodejs>=8.10 to install our dependencies. On Ubuntu 18.04, you need libpq-dev and python3-dev too.
 
-```sh
-# download, unpack and clean
-wget https://github.com/labcodes/django-react-webpack/archive/feature/update.zip
-unzip update.zip
-rm update.zip
-cd django-react-webpack-feature-update
+The easiest way to get started with this boilerplate is to run:
 
-# create the virtualenv and install python dependecies
-python3 -m venv .
-source bin/activate
-pip install -r requirements.txt
+`wget -O - https://raw.githubusercontent.com/labcodes/django-react-webpack/feature\/update/create_project.sh | bash`
 
-# install nvm, correct node version and js dependencies
-make node_setup
-npm install yarn
-npx yarn install -D
-
-# set up basic configs for the django server
-cp env.example .env
-python manage.py migrate
-
-# run the app
-make run
-```
+It downloads the current code, unpacks it, then sets up nvm and dependencies. You may check the code and run it manually as well, it's inside `create_project.sh' :]
 
 If everything went right, you should have a server running at `localhost:8000`. Visit that on your browser to make sure everything is working <3
 
 ## Running it
 
-If you want to run the project locally, be sure to have your virtualenv active (running `source bin/activate` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder).
+After installing, when you want to run the project locally, be sure to have your virtualenv active (running `source bin/activate` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make node_setup` manually.
 
 Then, to run django and webpack in parallel for development, just run:
 
 `make run`
 
-If you have any issues with nvm, like "Command not found", [try reading their documentation](https://github.com/nvm-sh/nvm#installing-and-updating) on how to use it. On the worst case scenario, you may need to run `make node_setup` again.
+Since nvm can be a little fiddly, if you have any issues with it, [try reading their documentation](https://github.com/nvm-sh/nvm#installing-and-updating) on how to use it.
 
 ## Postinstall
 
