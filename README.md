@@ -28,6 +28,13 @@ Then, to run django and webpack in parallel for development, just run:
 
 Since nvm can be a little fiddly, if you have any issues with it, [try reading their documentation](https://github.com/nvm-sh/nvm#installing-and-updating) on how to use it.
 
+## Adding new dependencies
+
+If you wish to add new dependencies, just note that:
+
+- for python dependencies, use `pip install name_of_the_dependency` to install then `pip freeze > requirements.txt` to permanently add it to the requirements;
+- for js dependencies, we're using nvm and yarn, so be sure to run `nvm use` before running `npx yarn add name_of_the_dependency` or, if it's a development-only dependency, `npx yarn add name_of_the_dependency -D`.
+
 ## Postinstall
 
 There are a couple of things we suggest you do after installing the boilerplate.
@@ -37,4 +44,5 @@ You may want to:
 - rename the folder to match your project name;
 - move the folder to your preferred folder;
 - start a new git repository;
+- add `nvm use` to the end of your `bin/activate` script, so that you're always using nvm whenever the virtualenv is active;
 - check `project/settings.py` for variables that need to be customized (PWA related, for example).
