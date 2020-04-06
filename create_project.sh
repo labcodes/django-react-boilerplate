@@ -20,6 +20,7 @@ echo "--------------> Installing nvm, node==lts and js dependencies..."
 echo ""
 make node_setup
 npm install yarn
+rm package-lock.json
 npx yarn install -D
 
 echo ""
@@ -30,6 +31,7 @@ python manage.py migrate
 
 echo ""
 echo -e "--------------> \033[1mDone! Now we'll run the app to check everything is running smoothly :]\033[0m"
+sleep 2
 echo "--------------> Running the app for the first time! Hit Ctrl+C or Command+C to interrupt."
 echo ""
 make run
