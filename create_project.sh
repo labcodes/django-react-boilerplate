@@ -9,19 +9,15 @@ rm update.zip
 cd django-react-webpack-feature-update
 
 echo ""
-echo "--------------> Creating the virtualenv and installing python dependencies..."
+echo "--------------> Creating the python virtualenv..."
 echo ""
 python3 -m venv .
 source bin/activate
-pip install -r requirements.txt
 
 echo ""
-echo "--------------> Installing nvm, node==lts and js dependencies..."
+echo "--------------> Installing python and js dependencies..."
 echo ""
-make node_setup
-npm install yarn
-rm package-lock.json
-npx yarn install -D
+make install_dependencies
 
 echo ""
 echo "--------------> Setting up basic configuration for the django server..."
