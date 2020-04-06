@@ -12,7 +12,9 @@ First of all, we require wget, make, python>=3.6 and nodejs>=8.10 to install our
 
 The easiest way to get started with this boilerplate is to run:
 
-`wget -O - https://raw.githubusercontent.com/labcodes/django-react-webpack/feature\/update/create_project.sh | bash`
+```sh
+wget -O - https://raw.githubusercontent.com/labcodes/django-react-webpack/feature\/update/create_project.sh | bash
+```
 
 It downloads the current code, unpacks it, then sets up nvm and dependencies. You may check the code and run it manually as well, it's inside `create_project.sh' :]
 
@@ -30,7 +32,9 @@ After installing, when you want to run the project locally, be sure to have your
 
 Then, to run django and webpack in parallel for development, just run:
 
-`make run`
+```sh
+make run
+```
 
 Since nvm can be a little fiddly, if you have any issues with it, [try reading their documentation](https://github.com/nvm-sh/nvm#installing-and-updating) on how to use it.
 
