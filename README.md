@@ -18,9 +18,15 @@ It downloads the current code, unpacks it, then sets up nvm and dependencies. Yo
 
 If everything went right, you should have a server running at `localhost:8000`. Visit that on your browser to make sure everything is working <3
 
+### Installing it manually
+
+If the script isn't working or you want to install everything manually, first [download the zip with the boilerplate from github](https://github.com/labcodes/django-react-webpack/archive/feature/update.zip), create a virtualenv in it, activate it, then run `make install_dependencies`.
+
+With that done, the app is almost ready to be run! You just need to copy the `env.example` file to `.env`, so that the django app has access to evironment variables via python-decouple, then run `python manage.py migrate` to create a dev database, and finally `make run`, so that both webpack and django run in parallel.
+
 ## Running it
 
-After installing, when you want to run the project locally, be sure to have your virtualenv active (running `source bin/activate` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make node_setup` manually.
+After installing, when you want to run the project locally, be sure to have your virtualenv active (running `source bin/activate` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make setup_nvm` manually.
 
 Then, to run django and webpack in parallel for development, just run:
 
