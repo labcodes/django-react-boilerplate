@@ -16,7 +16,7 @@ The easiest way to get started with this boilerplate is to run:
 wget -O - https://raw.githubusercontent.com/labcodes/django-react-webpack/feature\/update/create_project.sh | bash
 ```
 
-It downloads the current code, unpacks it, then sets up nvm and dependencies. You may check the code and run it manually as well, it's inside `create_project.sh' :]
+It downloads the current code, unpacks it, then sets up nvm and dependencies. You may check the code and run it manually as well, it's inside `create_project.sh` :]
 
 If everything went right, you should have a server running at `localhost:8000`. Visit that on your browser to make sure everything is working <3
 
@@ -28,7 +28,7 @@ With that done, the app is almost ready to be run! You just need to copy the `en
 
 ## Running it
 
-After installing, when you want to run the project locally, be sure to have your virtualenv active (running `source bin/activate` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make setup_nvm` manually.
+After installing, when you want to run the project locally, be sure to have your virtualenv active (running `source bin/activate` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make setup_node_environment` manually.
 
 Then, to run django and webpack in parallel for development, just run:
 
