@@ -52,7 +52,7 @@ There are a couple of things we suggest you do after installing the boilerplate.
 You may want to:
 
 - rename the folder to match your project name;
-- move the folder to your preferred folder;
+- move the project folder to your preferred folder (though you [may need to remake your virtualenv to do so](https://stackoverflow.com/questions/32407365/can-i-move-a-virtualenv#answer-58772116));
 - start a new git repository;
 - add `nvm use` to the end of your `bin/activate` script, so that you're always using nvm whenever the virtualenv is active;
 - check `project/settings.py` for variables that need to be customized (PWA related, for example).
