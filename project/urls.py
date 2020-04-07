@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.views.generic import TemplateView
-from django.urls import path, include
+from django.urls import path, re_path, include
 from time import sleep
 
 
@@ -33,11 +33,8 @@ def sample_api_view(request):
 
 
 frontend_urls = [
-    path(
-        "sample-nested-page/", TemplateView.as_view(template_name="frontend/index.html")
-    ),
-    path("", TemplateView.as_view(template_name="frontend/index.html")),
     path("", include("pwa.urls")),
+    re_path(r'^.*$', TemplateView.as_view(template_name="frontend/index.html")),
 ]
 
 
