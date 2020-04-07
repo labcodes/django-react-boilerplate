@@ -34,7 +34,7 @@ def sample_api_view(request):
 
 frontend_urls = [
     path("", include("pwa.urls")),
-    re_path(r'^.*$', TemplateView.as_view(template_name="frontend/index.html")),
+    re_path(r"^.*$", TemplateView.as_view(template_name="frontend/index.html")),
 ]
 
 
