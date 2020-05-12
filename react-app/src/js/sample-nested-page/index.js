@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default class SampleNestedPage extends React.Component {
   render() {
     return (
-      <div id="sample-nested-page">
+      <main className="sample-nested-page">
         <Helmet>
           <title>DRW - Sample Nested Page</title>
         </Helmet>
@@ -26,7 +26,7 @@ export default class SampleNestedPage extends React.Component {
         <p>
           <Link to="/">Back to home.</Link>
         </p>
-      </div>
+      </main>
     );
   }
 }
