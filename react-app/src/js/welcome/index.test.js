@@ -1,12 +1,13 @@
 import React from "react";
-import { shallow, mount } from "enzyme";
+import { shallow } from "enzyme";
 
-import { BrowserRouter } from "react-router-dom";
 import { Welcome } from "./index";
 
 describe("Welcome", () => {
   it("renders without props", async () => {
-    expect(shallow(<Welcome />)).toBeTruthy();
+    const component = shallow(<Welcome />);
+    expect(component).toBeTruthy();
+    expect(component.find(".welcome__message").exists()).toBeFalsy();
   });
 
   it("calls fetchWelcomeMessage on mounting", async () => {
@@ -18,22 +19,9 @@ describe("Welcome", () => {
 
   it("renders message if passed", async () => {
     const message = "Test message";
-    // BrowserRouter is needed, since Welcome uses the Link component
-    let component = mount(
-      <BrowserRouter>
-        <Welcome />
-      </BrowserRouter>
-    );
+    const component = shallow(<Welcome message={message} />);
 
-    expect(component.find(".message").exists()).toBeFalsy();
-
-    component = mount(
-      <BrowserRouter>
-        <Welcome message={message} />
-      </BrowserRouter>
-    );
-
-    expect(component.find(".message").exists()).toBeTruthy();
-    expect(component.find(".message").text()).toEqual(message);
+    expect(component.find(".welcome__message").exists()).toBeTruthy();
+    expect(component.find(".welcome__message").text()).toEqual(message);
   });
 });

@@ -26,22 +26,22 @@ export class Welcome extends React.Component {
     const { message } = this.props;
 
     return (
-      <div id="welcome">
+      <main className="welcome">
         <Helmet>
           <title>DRW - Welcome!</title>
         </Helmet>
 
-        <h1>Welcome to our app!</h1>
+        <h1 className="welcome__title">Welcome to our app!</h1>
         <p>
           Now, you may edit the routes on the `routes.js` file and/or edit this
           file to start developing your app :]
         </p>
-        {message ? <p className="message">{message}</p> : null}
+        {message ? <p className="welcome__message">{message}</p> : null}
         <p>
           To understand a bit better about routing, take a look at our
           <Link to="/sample-nested-page/"> sample nested page</Link>.
         </p>
-      </div>
+      </main>
     );
   }
 }

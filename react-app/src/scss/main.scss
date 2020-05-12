@@ -6,7 +6,7 @@
 @import "base";
 
 // then, we import our custom css
-@import "pages/welcome";
+@import "components/welcome";
 
 // finally, we import the overrides needed for customizing third-party css
 @import "overrides";
