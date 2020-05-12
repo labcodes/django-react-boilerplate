@@ -1,14 +1,22 @@
 {% load pwa %}
+{% load i18n %}
 {% load render_bundle from webpack_loader %}
+
+{% get_current_language as LANGUAGE_CODE %}
+
 <!DOCTYPE html>
-<html>
+<html lang="{{ LANGUAGE_CODE }}">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Django + React + Webpack boilerplate used and made by Labcodes" />
   <title>Django React Webpack</title>
+
   <!-- Webpack rendered CSS -->
   {% render_bundle 'main' 'css' %}
+
+  <!-- PWA metatags -->
   {% progressive_web_app_meta %}
 </head>
 
