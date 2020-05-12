@@ -56,6 +56,9 @@ module.exports = {
       clientsClaim: true,
       skipWaiting: true,
       inlineWorkboxRuntime: true,
+      // here, we set the navigateFallback to '/',
+      // so that any missing urls are handled by react-router
+      navigateFallback: '/',
       additionalManifestEntries: [
         { url: "/", revision: cacheHash },
         { url: "/manifest.json", revision: cacheHash },
