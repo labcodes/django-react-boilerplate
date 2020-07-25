@@ -1,0 +1,12 @@
+// main.scss
+// Even though it is the root file for styles, this file will only have imports of other scss files
+
+// first, we import the required scss partials
+@import "variables";
+@import "base";
+
+// then, we import our custom css
+@import "components/welcome";
+
+// finally, we import the overrides needed for customizing third-party css
+@import "overrides";

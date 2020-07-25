@@ -1,5 +1,19 @@
 {
-    "presets": [
-      "es2015", "react"
+  "presets": [
+    ["@babel/env", {
+      "targets": {
+        "browsers": "last 3 versions"
+      }
+    }],
+    "@babel/react"
+  ],
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    [
+      "@babel/plugin-proposal-class-properties",
+      {
+        "loose": true
+      }
     ]
+  ]
 }
