@@ -1,12 +1,16 @@
+#!/usr/bin/env bash
+
 echo ""
 echo -e "--------------> \033[1mThank you for choosing our boilerplate! We'll begin installation right now :]\033[0m"
+read -p "--------------> Project folder name: " mainmenuinput
 echo ""
 echo "--------------> Downloading, unpacking and cleaning base code..."
 echo ""
-wget https://github.com/labcodes/django-react-webpack/archive/feature/update.zip
-unzip -qq update.zip
-rm update.zip
-cd django-react-webpack-feature-update
+wget https://github.com/labcodes/django-react-webpack/archive/master.zip -P /tmp/
+unzip -qq /tmp/master.zip
+rm /tmp/master.zip
+mv django-react-webpack-master "$mainmenuinput"
+cd "$mainmenuinput"
 
 echo ""
 echo "--------------> Creating the python virtualenv..."

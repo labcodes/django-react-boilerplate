@@ -13,7 +13,7 @@ First of all, we require wget, make, python>=3.6 and nodejs>=8.10 to install our
 The easiest way to get started with this boilerplate is to run:
 
 ```sh
-wget -O - https://raw.githubusercontent.com/labcodes/django-react-webpack/master/create_project.sh | bash
+wget https://raw.githubusercontent.com/labcodes/django-react-webpack/master/create_project.sh --no-cache -P /tmp/ && bash /tmp/create_project.sh
 ```
 
 It downloads the current code, unpacks it, then sets up nvm and dependencies. You may check the code and run it manually as well, it's inside `create_project.sh` :]
