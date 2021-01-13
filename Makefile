@@ -1,10 +1,10 @@
 .PHONY: build_frontend run_frontend run_django run install_dependencies setup_node_environment
 
 build_frontend:
-	npx yarn build
+	npm run build
 
 run_frontend:
-	npx yarn start
+	npm start
 
 run_django:
 	python manage.py runserver
@@ -15,7 +15,7 @@ run:
 install_dependencies:
 	make setup_node_environment
 	pip install -r requirements.txt
-	npx yarn install -D
+	npm i
 
 setup_node_environment:
 	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
