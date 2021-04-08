@@ -4,7 +4,7 @@ attrs==19.3.0
 black==19.10b0
 click==7.1.1
 dj-database-url==0.5.0
-Django==3.0.4
+Django==3.0.14
 django-heroku==0.3.1
 django-pwa==1.0.8
 django-webpack-loader==0.7.0
