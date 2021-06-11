@@ -14,7 +14,7 @@ run:
 
 install_dependencies:
 	make setup_node_environment
-	pip install -r requirements.txt
+	poetry install
 	npm i
 
 setup_node_environment:
