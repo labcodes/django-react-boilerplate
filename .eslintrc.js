@@ -4,6 +4,14 @@ module.exports = {
   rules: {
     'arrow-body-style': ['error', 'as-needed'],
     'class-methods-use-this': [1, { 'exceptMethods': ['render'] }],
+    'jsx-a11y/label-has-associated-control': ["error",
+      {
+        "labelComponents": [],
+        "labelAttributes": [],
+        "controlComponents": [],
+        "assert": "both",
+        "depth": 25
+      }],
     'import/no-named-as-default': 'off',
     'import/prefer-default-export': 'off',
 
