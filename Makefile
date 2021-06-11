@@ -15,10 +15,23 @@ run_frontend: ## run frontend application
 run_django: ## run backend application
 	python manage.py runserver
 
+<<<<<<< HEAD
 run: ## run both backend and frontend applications
 	make -j2 run_django run_frontend
 
 install_dependencies: ## install both backend and frontend dependencies
+=======
+run_cypress:
+	./node_modules/.bin/cypress open
+
+run:
+	make -j2 run_django run_frontend
+
+run_e2e:
+	make -j3 run_django run_frontend run_cypress
+
+install_dependencies:
+>>>>>>> b0ecb55 (Add makefile scripts to open cypress for testing)
 	make setup_node_environment
 	poetry install
 	npm i
