@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./Header";
 import NoMatch404 from "./NoMatch404";
 
-const WelcomePage = React.lazy(() => import("./welcome"));
-const SampleNestedPage = React.lazy(() => import("./sample-nested-page"));
+const WelcomePage = React.lazy(() => import("./WelcomePage"));
+const SampleNestedPage = React.lazy(() => import("./SampleNestedPage"));
 
 export default class Routes extends React.Component {
   render() {
