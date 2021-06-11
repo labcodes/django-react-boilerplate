@@ -38,6 +38,12 @@ make run
 
 Since nvm can be a little fiddly, if you have any issues with it, [try reading their documentation](https://github.com/nvm-sh/nvm#installing-and-updating) on how to use it.
 
+## Testing it
+
+Run the command `pytest` in the main directory, or run the script `make test`.
+
+For coverage report, run the script `make cov`. Your default browser will open with the report for the tests, if all tests pass.
+
 ## Adding new dependencies
 
 If you wish to add new dependencies, just note that:
