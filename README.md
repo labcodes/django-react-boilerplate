@@ -8,7 +8,17 @@ It's still on beta, so expect little bugs to happen. They shouldn't, but if they
 
 ## Setup
 
-First of all, we require wget, make, python>=3.6 and nodejs>=8.10 to install our dependencies. On Ubuntu 18.04, you need libpq-dev and python3-dev too.
+First of all, to install our dependencies, we require:
+- wget
+- make
+- python>=3.6
+- [poetry](https://python-poetry.org)
+- nodejs>=8.10
+
+
+On Ubuntu>=18.04, you also need:
+- libpq-dev
+- python3-dev
 
 The easiest way to get started with this boilerplate is to run:
 
