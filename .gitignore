@@ -120,3 +120,6 @@ webpack-stats.json
 
 # VSCode
 .vscode
+
+# idea
+.idea/
