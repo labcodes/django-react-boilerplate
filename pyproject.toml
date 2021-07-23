@@ -2,7 +2,7 @@
 name = "django-react-webpack"
 version = "0.1.0"
 description = ""
-authors = ["Olga Pinheiro <olgapin@gmail.com>"]
+authors = ["Labcodes <support@labcodes.com.br>"]
 
 [tool.poetry.dependencies]
 python = "^3.6"
