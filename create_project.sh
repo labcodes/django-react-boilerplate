@@ -13,14 +13,14 @@ mv django-react-webpack-master "$mainmenuinput"
 cd "$mainmenuinput"
 
 echo ""
-echo "--------------> Installing python and js dependencies..."
-echo ""
-make install_dependencies
-
-echo ""
 echo "--------------> Activating the poetry python virtualenv..."
 echo ""
 poetry shell
+
+echo ""
+echo "--------------> Installing python and js dependencies..."
+echo ""
+make install_dependencies
 
 echo ""
 echo "--------------> Setting up basic configuration for the django server..."

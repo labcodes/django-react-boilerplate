@@ -32,7 +32,7 @@ If everything went right, you should have a server running at `localhost:8000`. 
 
 ### Installing it manually
 
-If the script isn't working or you want to install everything manually, first [download the zip with the boilerplate from github](https://github.com/labcodes/django-react-webpack/archive/feature/update.zip), run `make install_dependencies`, then run `poetry shell` to activate the virtualenv.
+If the script isn't working or you want to install everything manually, first [download the zip with the boilerplate from github](https://github.com/labcodes/django-react-webpack/archive/feature/update.zip), run `poetry shell` to activate the virtualenv, then run `make install_dependencies` to install all dependencies.
 
 With that done, the app is almost ready to be run! You just need to copy the `env.example` file to `.env`, so that the django app has access to evironment variables via python-decouple, then run `python manage.py migrate` to create a dev database, and finally `make run`, so that both webpack and django run in parallel.
 
