@@ -15,7 +15,7 @@ cd "$mainmenuinput"
 echo ""
 echo "--------------> Activating the poetry python virtualenv..."
 echo ""
-poetry shell
+source $(poetry env info --path)/bin/activate
 
 echo ""
 echo "--------------> Installing python and js dependencies..."
