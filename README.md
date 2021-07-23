@@ -8,7 +8,17 @@ It's still on beta, so expect little bugs to happen. They shouldn't, but if they
 
 ## Setup
 
-First of all, we require wget, make, python>=3.6 and nodejs>=8.10 to install our dependencies. On Ubuntu 18.04, you need libpq-dev and python3-dev too.
+First of all, to install our dependencies, we require:
+- wget
+- make
+- python>=3.6
+- [poetry](https://python-poetry.org)
+- nodejs>=8.10
+
+
+On Ubuntu>=18.04, you also need:
+- libpq-dev
+- python3-dev
 
 The easiest way to get started with this boilerplate is to run:
 
@@ -22,13 +32,13 @@ If everything went right, you should have a server running at `localhost:8000`. 
 
 ### Installing it manually
 
-If the script isn't working or you want to install everything manually, first [download the zip with the boilerplate from github](https://github.com/labcodes/django-react-webpack/archive/feature/update.zip), create a virtualenv in it, activate it, then run `make install_dependencies`.
+If the script isn't working or you want to install everything manually, first [download the zip with the boilerplate from github](https://github.com/labcodes/django-react-webpack/archive/feature/update.zip), run `poetry shell` to activate the virtualenv, then run `make install_dependencies` to install all dependencies.
 
 With that done, the app is almost ready to be run! You just need to copy the `env.example` file to `.env`, so that the django app has access to evironment variables via python-decouple, then run `python manage.py migrate` to create a dev database, and finally `make run`, so that both webpack and django run in parallel.
 
 ## Running it
 
-After installing, when you want to run the project locally, be sure to have your virtualenv active (running `source bin/activate` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make setup_node_environment` manually.
+After installing, when you want to run the project locally, be sure to have your virtualenv active (running `poetry shell` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make setup_node_environment` manually.
 
 Then, to run django and webpack in parallel for development, just run:
 
@@ -48,7 +58,8 @@ For coverage report, run the script `make cov`. Your default browser will open w
 
 If you wish to add new dependencies, just note that:
 
-- for python dependencies, use `pip install name_of_the_dependency` to install then `pip freeze > requirements.txt` to permanently add it to the requirements;
+- for python dependencies, use `poetry add name_of_the_dependency` to install and add it to the requirements (`pyproject.toml`);
+- to update python dependencies, run `poetry update`;
 - for js dependencies, we're using nvm and yarn, so be sure to run `nvm use` before running `npx yarn add name_of_the_dependency` or, if it's a development-only dependency, `npx yarn add name_of_the_dependency -D`.
 
 ## Postinstall

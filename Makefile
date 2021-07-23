@@ -20,7 +20,7 @@ run: ## run both backend and frontend applications
 
 install_dependencies: ## install both backend and frontend dependencies
 	make setup_node_environment
-	pip install -r requirements.txt
+	poetry install
 	npm i
 
 setup_node_environment: ## setup node environment
