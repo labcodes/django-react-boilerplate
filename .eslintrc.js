@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['airbnb', 'prettier', "plugin:react/recommended"],
+  extends: ['airbnb', 'prettier', "plugin:react/recommended", "plugin:cypress/recommended"],
   plugins: ['prettier'],
   rules: {
     'arrow-body-style': ['error', 'as-needed'],
