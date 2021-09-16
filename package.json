@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "vite build",
-    "lint": "eslint ./react-app/src/",
+    "lint": "eslint ./react-app/js/",
     "dev": "vite"
   },
   "repository": {
