@@ -160,15 +160,5 @@ PWA_APP_SPLASH_SCREEN = [
 PWA_APP_DIR = "ltr"
 PWA_APP_LANG = "en-US"
 
-# Webpack Loader
-# https://github.com/ezhome/django-webpack-loader
-
-WEBPACK_LOADER = {
-    "DEFAULT": {
-        "BUNDLE_DIR_NAME": "dist/",
-        "STATS_FILE": os.path.join(BASE_DIR, "webpack-stats.json"),
-    }
-}
-
 # If you're not using this project on heroku, comment the following lines
 django_heroku.settings(locals())
