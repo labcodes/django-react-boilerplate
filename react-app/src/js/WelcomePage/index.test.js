@@ -1,14 +1,14 @@
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import { render, screen } from "@testing-library/react";
 
 import { WelcomePage } from "./index";
-import { MemoryRouter } from "react-router-dom";
 
 describe("Welcome", () => {
   it("renders without props", async () => {
     const component = render(
       <MemoryRouter>
-        <WelcomePage />
+        <WelcomePage/>
       </MemoryRouter>
     );
     expect(component).toBeTruthy();
@@ -21,7 +21,7 @@ describe("Welcome", () => {
     expect(mockedFunc).not.toBeCalled();
     render(
       <MemoryRouter>
-        <WelcomePage fetchWelcomeMessage={mockedFunc} />
+        <WelcomePage fetchWelcomeMessage={mockedFunc}/>
       </MemoryRouter>
     );
     expect(mockedFunc).toBeCalled();
@@ -31,7 +31,7 @@ describe("Welcome", () => {
     const message = "Test message";
     render(
       <MemoryRouter>
-        <WelcomePage message={message} />
+        <WelcomePage message={message}/>
       </MemoryRouter>
     );
     expect(screen.getByText(message)).toBeTruthy();
