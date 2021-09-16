@@ -8,14 +8,14 @@ from django.utils.safestring import mark_safe
 register = template.Library()
 
 
-def load_json_from_dist(json_filename='manifest.json'):
-    manifest_file_path = Path(str(settings.VITE_APP_DIR), 'dist', json_filename)
+def load_json_from_dist(json_filename="manifest.json"):
+    manifest_file_path = Path(str(settings.VITE_APP_DIR), "dist", json_filename)
     if not manifest_file_path.exists():
         raise Exception(
             f"Vite manifest file not found on path: {str(manifest_file_path)}"
         )
     else:
-        with open(manifest_file_path, 'r') as manifest_file:
+        with open(manifest_file_path, "r") as manifest_file:
             try:
                 manifest = json.load(manifest_file)
             except Exception:

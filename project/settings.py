@@ -29,7 +29,7 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = config("DEBUG", False)
 
 # Needed for production. Avoid using '*'.
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", ['localhost'])
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", ["localhost"])
 
 # Application definition
 
@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "pwa",
-    "core"
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -118,7 +118,7 @@ USE_TZ = True
 
 # Needed for 'debug' to be available inside templates.
 # https://docs.djangoproject.com/en/3.2/ref/templates/api/#django-template-context-processors-debug
-INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = ["127.0.0.1"]
 
 # Vite App Dir: point it to the folder your vite app is in.
 VITE_APP_DIR = os.path.join(BASE_DIR, "react-app")
