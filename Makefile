@@ -10,7 +10,7 @@ build_frontend: ## build frontend application
 	npm run build
 
 run_frontend: ## run frontend application
-	npm start
+	npm run dev
 
 run_django: ## run backend application
 	python manage.py runserver
