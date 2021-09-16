@@ -26,16 +26,14 @@ if (module.hot) {
   module.hot.dispose(() => (window.initialState = store.getState()));
 }
 
-class App extends React.Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Routes />
-      </Provider>
-    );
-  }
+function App() {
+  return (
+    <Provider store={store}>
+      <Routes/>
+    </Provider>
+  );
 }
 
 export default hot(App);
 
-ReactDOM.render(<App />, document.getElementById("react-app"));
+ReactDOM.render(<App/>, document.getElementById("react-app"));
