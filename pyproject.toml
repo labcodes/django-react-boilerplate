@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "django-react-webpack"
+name = "django-react-boilerplate"
 version = "0.1.0"
 description = ""
 authors = ["Labcodes <support@labcodes.com.br>"]

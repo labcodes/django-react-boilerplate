@@ -1,5 +1,5 @@
 {
-  "name": "django-react-webpack",
+  "name": "django-react-boilerplate",
   "version": "1.0.0",
   "description": "Boilerplate for a Django + React project using Webpack",
   "main": "index.js",
@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/labcodes/django-react-webpack.git"
+    "url": "git+https://github.com/labcodes/django-react-boilerplate.git"
   },
   "keywords": [
     "django",
     "react",
-    "webpack"
+    "vite"
   ],
   "husky": {
     "hooks": {
@@ -34,9 +34,9 @@
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/labcodes/django-react-webpack/issues"
+    "url": "https://github.com/labcodes/django-react-boilerplate/issues"
   },
-  "homepage": "https://github.com/labcodes/django-react-webpack#readme",
+  "homepage": "https://github.com/labcodes/django-react-boilerplate#readme",
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@babel/eslint-parser": "^7.15.4",

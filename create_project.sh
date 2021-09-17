@@ -6,10 +6,10 @@ read -p "--------------> Project folder name: " mainmenuinput
 echo ""
 echo "--------------> Downloading, unpacking and cleaning base code..."
 echo ""
-wget https://github.com/labcodes/django-react-webpack/archive/master.zip -P /tmp/
+wget https://github.com/labcodes/django-react-boilerplate/archive/master.zip -P /tmp/
 unzip -qq /tmp/master.zip
 rm /tmp/master.zip
-mv django-react-webpack-master "$mainmenuinput"
+mv django-react-boilerplate-master "$mainmenuinput"
 cd "$mainmenuinput"
 
 echo ""

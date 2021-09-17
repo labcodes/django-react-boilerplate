@@ -115,9 +115,6 @@ node_modules
 package-lock.json
 yarn.lock
 
-# Webpack
-webpack-stats.json
-
 # VSCode
 .vscode
 
