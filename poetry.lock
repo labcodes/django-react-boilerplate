@@ -157,14 +157,6 @@ python-versions = "*"
 django = ">=1.8"
 
 [[package]]
-name = "django-webpack-loader"
-version = "1.1.0"
-description = "Transparently use webpack with django"
-category = "main"
-optional = false
-python-versions = "*"
-
-[[package]]
 name = "djangorestframework"
 version = "3.12.4"
 description = "Web APIs for Django, made easy."
@@ -393,7 +385,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.14"
-content-hash = "c3c2656936c59271c9cff1cbd81c80c4fb2f1f8b52d9ed979fe3c50cab3f907f"
+content-hash = "21aaa5480933ede250df09051dd99b44fa00e6ac4459e76e8e4709d2a7cf4e87"
 
 [metadata.files]
 appdirs = [
@@ -497,10 +489,6 @@ django-heroku = [
 django-pwa = [
     {file = "django-pwa-1.0.10.tar.gz", hash = "sha256:07ed9dd57108838e3fe44b551a82032ca4ed76e31cb3c3e8d51604e0fe7e81e9"},
     {file = "django_pwa-1.0.10-py3-none-any.whl", hash = "sha256:b1a2057b1e72c40c3a14beb90b958482da185f1d40a141fcae3d76580984b930"},
-]
-django-webpack-loader = [
-    {file = "django-webpack-loader-1.1.0.tar.gz", hash = "sha256:c7f89a272a177a17a045ceab26bbb7e35d28ca5597c384de96817784b610c977"},
-    {file = "django_webpack_loader-1.1.0-py2.py3-none-any.whl", hash = "sha256:8a428355de2f88418209d84ad38bf33ad175fc370d3f778ffec8ea26041e589d"},
 ]
 djangorestframework = [
     {file = "djangorestframework-3.12.4-py3-none-any.whl", hash = "sha256:6d1d59f623a5ad0509fe0d6bfe93cbdfe17b8116ebc8eda86d45f6e16e819aaf"},
