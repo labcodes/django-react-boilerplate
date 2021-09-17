@@ -1,14 +1,14 @@
-# django-react-webpack
+# django-react-boilerplate
 
-This is Labcodes' boilerplate for django apps with frontend SPAs. We're currently using React and Webpack to manage the frontend.
+This is Labcodes' boilerplate for django apps with frontend SPAs. We're currently using React and Vite to manage the frontend.
 
 The boilerplate is PWA, HMR and code splitting ready (and a couple of other acronyms as well).
 
-It's still on beta, so expect little bugs to happen. They shouldn't, but if they pop up, add an issue and we'll get right to it!
+It's still on beta, so expect little bugs to happen. They shouldn't, but if they pop up, add an issue, and we'll get right to it!
 
 ## Setup
 
-First of all, to install our dependencies, we require:
+First, to install our dependencies, we require:
 - wget
 - make
 - python>=3.6
@@ -23,7 +23,7 @@ On Ubuntu>=18.04, you also need:
 The easiest way to get started with this boilerplate is to run:
 
 ```sh
-wget https://raw.githubusercontent.com/labcodes/django-react-webpack/master/create_project.sh --no-cache -P /tmp/ && bash /tmp/create_project.sh
+wget https://raw.githubusercontent.com/labcodes/django-react-boilerplate/master/create_project.sh --no-cache -P /tmp/ && bash /tmp/create_project.sh
 ```
 
 It downloads the current code, unpacks it, then sets up nvm and dependencies. You may check the code and run it manually as well, it's inside `create_project.sh` :]
@@ -32,15 +32,15 @@ If everything went right, you should have a server running at `localhost:8000`. 
 
 ### Installing it manually
 
-If the script isn't working or you want to install everything manually, first [download the zip with the boilerplate from github](https://github.com/labcodes/django-react-webpack/archive/feature/update.zip), run `poetry shell` to activate the virtualenv, then run `make install_dependencies` to install all dependencies.
+If the script isn't working or you want to install everything manually, first [download the zip with the boilerplate from github](https://github.com/labcodes/django-react-boilerplate/archive/feature/update.zip), run `poetry shell` to activate the virtualenv, then run `make install_dependencies` to install all dependencies.
 
-With that done, the app is almost ready to be run! You just need to copy the `env.example` file to `.env`, so that the django app has access to evironment variables via python-decouple, then run `python manage.py migrate` to create a dev database, and finally `make run`, so that both webpack and django run in parallel.
+With that done, the app is almost ready to be run! You just need to copy the `env.example` file to `.env`, so that the django app has access to evironment variables via python-decouple, then run `python manage.py migrate` to create a dev database, and finally `make run`, so that both vite and django run in parallel.
 
 ## Running it
 
 After installing, when you want to run the project locally, be sure to have your virtualenv active (running `poetry shell` from the project folder) and nvm set to the correct node version (by running `nvm use` on the project folder). If nvm is not found, try restarting your terminal or running `make setup_node_environment` manually.
 
-Then, to run django and webpack in parallel for development, just run:
+Then, to run django and vite in parallel for development, just run:
 
 ```sh
 make run
@@ -60,7 +60,7 @@ If you wish to add new dependencies, just note that:
 
 - for python dependencies, use `poetry add name_of_the_dependency` to install and add it to the requirements (`pyproject.toml`);
 - to update python dependencies, run `poetry update`;
-- for js dependencies, we're using nvm and yarn, so be sure to run `nvm use` before running `npx yarn add name_of_the_dependency` or, if it's a development-only dependency, `npx yarn add name_of_the_dependency -D`.
+- for js dependencies, we're using nvm and npm, so be sure to run `nvm use` before running `npm install name_of_the_dependency` or, if it's a development-only dependency, `npm install name_of_the_dependency -D`.
 
 ## Postinstall
 
