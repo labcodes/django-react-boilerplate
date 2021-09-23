@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Welcome renders without props 1`] = `
+<div>
+  <main
+    class="welcome"
+  >
+    <h1
+      class="welcome__title"
+    >
+      Welcome to our app!
+    </h1>
+    <p>
+      Now, you may edit the routes on the \`routes.js\` file and/or edit this file to start developing your app :]
+    </p>
+    <p>
+      To understand a bit better about routing, take a look at our
+      <a
+        href="/sample-nested-page/"
+      >
+         sample nested page
+      </a>
+      .
+    </p>
+  </main>
+</div>
+`;

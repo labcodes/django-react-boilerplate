@@ -1,27 +1,39 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { MemoryRouter } from "react-router-dom";
+import { render, screen } from "@testing-library/react";
 
-import { Welcome } from "./index";
+import { WelcomePage } from "./index";
 
 describe("Welcome", () => {
   it("renders without props", async () => {
-    const component = shallow(<Welcome />);
+    const component = render(
+      <MemoryRouter>
+        <WelcomePage />
+      </MemoryRouter>
+    );
     expect(component).toBeTruthy();
-    expect(component.find(".welcome__message").exists()).toBeFalsy();
+    expect(component.container.querySelector(".welcome__message")).toBeFalsy();
+    expect(component.container).toMatchSnapshot();
   });
 
   it("calls fetchWelcomeMessage on mounting", async () => {
     const mockedFunc = jest.fn();
     expect(mockedFunc).not.toBeCalled();
-    shallow(<Welcome fetchWelcomeMessage={mockedFunc} />);
+    render(
+      <MemoryRouter>
+        <WelcomePage fetchWelcomeMessage={mockedFunc} />
+      </MemoryRouter>
+    );
     expect(mockedFunc).toBeCalled();
   });
 
   it("renders message if passed", async () => {
     const message = "Test message";
-    const component = shallow(<Welcome message={message} />);
-
-    expect(component.find(".welcome__message").exists()).toBeTruthy();
-    expect(component.find(".welcome__message").text()).toEqual(message);
+    render(
+      <MemoryRouter>
+        <WelcomePage message={message} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(message)).toBeTruthy();
   });
 });
