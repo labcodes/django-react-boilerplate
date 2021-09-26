@@ -1,0 +1,1 @@
+{"message": "This message is coming from the backend.\n                      The django view is inside `project/urls.py` and the redux code is in `react-app/src/js/welcome/(actions|reducers).js`.\n                      Please remove them when starting your project :]"}

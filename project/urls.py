@@ -51,5 +51,5 @@ if not settings.DEBUG:
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("api/sample-api-view/", sample_api_view),
+    path("api/sample-api-view/", sample_api_view, name="sample_api_view"),
 ] + frontend_urls

@@ -305,6 +305,32 @@ toml = "*"
 testing = ["fields", "hunter", "process-tests", "six", "pytest-xdist", "virtualenv"]
 
 [[package]]
+name = "pytest-django"
+version = "4.4.0"
+description = "A Django plugin for pytest."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+pytest = ">=5.4.0"
+
+[package.extras]
+docs = ["sphinx", "sphinx-rtd-theme"]
+testing = ["django", "django-configurations (>=2.0)"]
+
+[[package]]
+name = "pytest-snapshot"
+version = "0.7.0"
+description = "A plugin for snapshot testing with pytest."
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.dependencies]
+pytest = ">=3.0.0"
+
+[[package]]
 name = "python-decouple"
 version = "3.4"
 description = "Strict separation of settings from code."
@@ -394,7 +420,7 @@ testing = ["pytest (>=4.6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytes
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.14"
-content-hash = "21aaa5480933ede250df09051dd99b44fa00e6ac4459e76e8e4709d2a7cf4e87"
+content-hash = "208e200f5e60f5defe0eef5d4846725d8e783235a9a04756c767871e6ee7c985"
 
 [metadata.files]
 asgiref = [
@@ -553,6 +579,14 @@ pytest = [
 pytest-cov = [
     {file = "pytest-cov-2.12.1.tar.gz", hash = "sha256:261ceeb8c227b726249b376b8526b600f38667ee314f910353fa318caa01f4d7"},
     {file = "pytest_cov-2.12.1-py2.py3-none-any.whl", hash = "sha256:261bb9e47e65bd099c89c3edf92972865210c36813f80ede5277dceb77a4a62a"},
+]
+pytest-django = [
+    {file = "pytest-django-4.4.0.tar.gz", hash = "sha256:b5171e3798bf7e3fc5ea7072fe87324db67a4dd9f1192b037fed4cc3c1b7f455"},
+    {file = "pytest_django-4.4.0-py3-none-any.whl", hash = "sha256:65783e78382456528bd9d79a35843adde9e6a47347b20464eb2c885cb0f1f606"},
+]
+pytest-snapshot = [
+    {file = "pytest-snapshot-0.7.0.tar.gz", hash = "sha256:427b5ab088b25a1c8b63ce99725040664c840ff1f5a3891252723cce972897f9"},
+    {file = "pytest_snapshot-0.7.0-py3-none-any.whl", hash = "sha256:8d6e77136eb25990b5d713876e4ed5ca45b3916ac719e0f8399ba42f65d280af"},
 ]
 python-decouple = [
     {file = "python-decouple-3.4.tar.gz", hash = "sha256:2e5adb0263a4f963b58d7407c4760a2465d464ee212d733e2a2c179e54c08d8f"},
