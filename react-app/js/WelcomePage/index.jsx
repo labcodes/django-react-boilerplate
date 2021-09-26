@@ -9,7 +9,7 @@ import { fetchWelcomeMessage } from "./actions";
 export function WelcomePage({ fetchWelcomeMessage, message }) {
   useEffect(() => {
     fetchWelcomeMessage();
-  }, [])
+  }, []);
 
   return (
     <main className="welcome">
@@ -38,8 +38,7 @@ WelcomePage.propTypes = {
 
 WelcomePage.defaultProps = {
   message: null,
-  fetchWelcomeMessage: () => {
-  }
+  fetchWelcomeMessage: () => {}
 };
 
 const mapStateToProps = ({ welcome }) => ({ message: welcome.message });
