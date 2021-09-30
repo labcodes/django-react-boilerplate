@@ -13,14 +13,15 @@ mv django-react-boilerplate-master "$mainmenuinput"
 cd "$mainmenuinput"
 
 echo ""
-echo "--------------> Activating the poetry python virtualenv..."
-echo ""
-source $(poetry env info --path)/bin/activate
-
-echo ""
 echo "--------------> Installing python and js dependencies..."
 echo ""
 make install_dependencies
+
+echo ""
+echo "--------------> Activating the poetry python virtualenv..."
+echo ""
+sleep "0.1"
+source $(poetry env info --path)/bin/activate
 
 echo ""
 echo "--------------> Setting up basic configuration for the django server..."
