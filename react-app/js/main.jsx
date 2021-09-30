@@ -2,8 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import thunk from "redux-thunk";
 import { Provider } from "react-redux";
-import { hot } from "react-hot-loader/root";
-import { createStore, applyMiddleware, compose } from "redux";
+import { applyMiddleware, compose, createStore } from "redux";
 import { apiMiddleware } from "react-redux-api-tools";
 
 import rootReducer from "./rootReducer";
@@ -20,20 +19,12 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunk, apiMiddleware))
 );
 
-if (module.hot) {
-  // save current state before module being reloaded
-  // eslint-disable-next-line no-return-assign
-  module.hot.dispose(() => (window.initialState = store.getState()));
-}
-
 function App() {
   return (
     <Provider store={store}>
-      <Routes/>
+      <Routes />
     </Provider>
   );
 }
 
-export default hot(App);
-
-ReactDOM.render(<App/>, document.getElementById("react-app"));
+ReactDOM.render(<App />, document.getElementById("react-app"));

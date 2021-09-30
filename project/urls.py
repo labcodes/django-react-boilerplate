@@ -37,10 +37,17 @@ frontend_urls = [
     re_path(r"^.*$", TemplateView.as_view(template_name="frontend/index.html")),
 ]
 
-# if you wish to test the PWA on dev, you need to remove this "if" statement,
-# so that the urls are added. remember to built the frontend manually as well.
+
 if not settings.DEBUG:
     frontend_urls.insert(0, path("", include("pwa.urls")))
+
+# if you wish to test the PWA on dev, uncomment the following lines,
+# so that django serves static files.
+# remember to built the frontend manually and run collectstatic as well.
+# from django.views.static import serve
+# frontend_urls += [
+#     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT})
+# ]
 
 urlpatterns = [
     path("admin/", admin.site.urls),

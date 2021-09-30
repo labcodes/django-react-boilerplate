@@ -10,10 +10,6 @@ context("Welcome Page", () => {
   });
 
   it("renders page correctly", () => {
-    cy.contains(
-      ".welcome__message",
-      "Welcome Message is being fetched from the API..."
-    );
     cy.wait("@getMessage");
     cy.contains(".welcome__message", "This is a stubbed message!");
 

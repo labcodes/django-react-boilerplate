@@ -11,12 +11,13 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
-from decouple import config
 
+# If you're not using this project on heroku, comment the following lines
+import django_heroku
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -27,8 +28,8 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", False)
 
-ALLOWED_HOSTS = []
-
+# Needed for production. Avoid using '*'.
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", ["localhost"])
 
 # Application definition
 
@@ -40,8 +41,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "webpack_loader",
     "pwa",
+    "core",
 ]
 
 MIDDLEWARE = [
@@ -74,7 +75,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "project.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
@@ -84,7 +84,6 @@ DATABASES = {
         "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -104,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
@@ -118,21 +116,31 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Needed for 'debug' to be available inside templates.
+# https://docs.djangoproject.com/en/3.2/ref/templates/api/#django-template-context-processors-debug
+INTERNAL_IPS = ["127.0.0.1"]
 
+# Vite App Dir: point it to the folder your vite app is in.
+VITE_APP_DIR = os.path.join(BASE_DIR, "react-app")
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/3.1/howto/static-files/
+
+# You may change these, but it's important that the dist folder is includedself.
+# If it's not, collectstatic won't copy your bundle to production.
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
-
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static/"),
-    os.path.join(BASE_DIR, "react-app/dist/"),
-)
+    os.path.join(VITE_APP_DIR, "dist"),
+]
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # PWA configuration
 
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, "react-app/dist/service-worker.js")
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, "react-app/dist/sw.js")
 PWA_APP_NAME = "DRW - Change me!"
 PWA_APP_DESCRIPTION = "DRW - Change me!"
 PWA_APP_THEME_COLOR = "#0A0302"
@@ -152,17 +160,5 @@ PWA_APP_SPLASH_SCREEN = [
 PWA_APP_DIR = "ltr"
 PWA_APP_LANG = "en-US"
 
-# Webpack Loader
-# https://github.com/ezhome/django-webpack-loader
-
-WEBPACK_LOADER = {
-    "DEFAULT": {
-        "BUNDLE_DIR_NAME": "dist/",
-        "STATS_FILE": os.path.join(BASE_DIR, "webpack-stats.json"),
-    }
-}
-
 # If you're not using this project on heroku, comment the following lines
-import django_heroku
-
 django_heroku.settings(locals())

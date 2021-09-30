@@ -9,12 +9,12 @@ const SampleNestedPage = React.lazy(() => import("./SampleNestedPage"));
 export default function Routes() {
   return (
     <Router>
-      <Header/>
+      <Header />
       <React.Suspense fallback={<div>Loading...</div>}>
         <Switch>
-          <Route path="/sample-nested-page/" component={SampleNestedPage}/>
-          <Route exact path="/" component={WelcomePage}/>
-          <Route component={NoMatch404}/>
+          <Route path="/sample-nested-page/" component={SampleNestedPage} />
+          <Route exact path="/" component={WelcomePage} />
+          <Route component={NoMatch404} />
         </Switch>
       </React.Suspense>
     </Router>
