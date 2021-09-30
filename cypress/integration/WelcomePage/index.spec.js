@@ -3,13 +3,18 @@
 context("Welcome Page", () => {
   beforeEach(() => {
     cy.intercept("GET", "/api/sample-api-view/", {
-      fixture: "WelcomePage/sample-api-view.json"
+      fixture: "WelcomePage/sample-api-view.json",
+      delay: 100
     }).as("getMessage");
 
     cy.visit("/");
   });
 
   it("renders page correctly", () => {
+    cy.contains(
+      ".welcome__message",
+      "Welcome Message is being fetched from the API..."
+    );
     cy.wait("@getMessage");
     cy.contains(".welcome__message", "This is a stubbed message!");
 
