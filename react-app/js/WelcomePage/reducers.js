@@ -4,8 +4,18 @@ import {
   FETCH_WELCOME_MESSAGE_SUCCESS
 } from "./actions";
 
+/**
+ * Initial state for welcome reducers
+ * @type {WelcomeState}
+ */
 const initialState = { message: null };
 
+/**
+ * Welcome reducer function
+ * @param {WelcomeState} state
+ * @param action
+ * @returns {WelcomeState}
+ */
 export default function welcomeReducers(state = initialState, action) {
   switch (action.type) {
     case FETCH_WELCOME_MESSAGE:
