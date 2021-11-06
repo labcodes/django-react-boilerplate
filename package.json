@@ -24,6 +24,7 @@
     }
   },
   "jest": {
+    "testEnvironment": "jsdom",
     "setupFiles": [
       "jest-prop-type-error"
     ],
