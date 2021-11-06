@@ -33,18 +33,18 @@ export function WelcomePage({ fetchWelcomeMessage, message }) {
 
 WelcomePage.propTypes = {
   message: PropTypes.string,
-  fetchWelcomeMessage: PropTypes.func
+  fetchWelcomeMessage: PropTypes.func,
 };
 
 WelcomePage.defaultProps = {
   message: null,
-  fetchWelcomeMessage: () => {}
+  fetchWelcomeMessage: () => {},
 };
 
 const mapStateToProps = ({ welcome }) => ({ message: welcome.message });
 
-const mapDispatchToProps = dispatch => ({
-  fetchWelcomeMessage: () => dispatch(fetchWelcomeMessage())
+const mapDispatchToProps = (dispatch) => ({
+  fetchWelcomeMessage: () => dispatch(fetchWelcomeMessage()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(WelcomePage);
