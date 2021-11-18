@@ -11,9 +11,9 @@ export function fetchWelcomeMessage() {
     types: {
       request: FETCH_WELCOME_MESSAGE,
       success: FETCH_WELCOME_MESSAGE_SUCCESS,
-      failure: FETCH_WELCOME_MESSAGE_FAILURE
+      failure: FETCH_WELCOME_MESSAGE_FAILURE,
     },
     shouldDispatch: ({ welcome }) => !welcome.message,
-    apiCallFunction: () => fetchFromApi("/api/sample-api-view/")
+    apiCallFunction: () => fetchFromApi("/api/sample-api-view/"),
   };
 }
